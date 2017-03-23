@@ -6,13 +6,39 @@
     android:layout_height="match_parent"
     tools:context="com.silbytech.loyali.SplashActivity">
 
-    <ImageView
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:id="@+id/imageView"
-        android:src="@drawable/loyali_logo" />
+    <RelativeLayout
+        android:id="@+id/fragImage"
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
+        <ImageView
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:id="@+id/imageView"
+            android:src="@drawable/loyali_logo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/fragImage"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp">
+
+        <ImageView
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:id="@+id/silby"
+            android:src="@drawable/silby_powered_blue_logo"/>
+    </RelativeLayout>
+
+
+
 </RelativeLayout>
