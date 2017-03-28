@@ -7,14 +7,23 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.silbytech.loyali.responses.RegisterResponse;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -26,20 +35,59 @@ public class RegisterActivity extends AppCompatActivity {
     private String TAG = "RegisterActivity";
     public static final String PREFS = "prefs";
     private SharedPreferences preferences;
-    Button btnRegister;
+    private CallbackManager callbackManager;
+    private ProfileTracker profileTracker;
+    private LoginButton registerButton;
+    private Button btnRegister;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_layout);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        android.app.FragmentManager fragMan = getFragmentManager();
-        FragmentTransaction ft = fragMan.beginTransaction();
-        FacebookRegisterFragment facebookRegisterFragment = new FacebookRegisterFragment();
-        ft.add(R.id.frag1, facebookRegisterFragment);
-        ft.commit();
-
+        setContentView(R.layout.register_layout);
         btnRegister = (Button)findViewById(R.id.btnRegisterNewUser);
+        callbackManager = CallbackManager.Factory.create();
+        registerButton = (LoginButton)findViewById(R.id.fb_register_btn);
+        registerButton.setReadPermissions("public_profile");
+
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                if(currentProfile != null){
+                    System.out.println("User changed photo");
+                    String facebookID = currentProfile.getId();
+                    String firstName = currentProfile.getFirstName();
+                    String surname = currentProfile.getLastName();
+                    String fbMail = facebookID + "@loyali.com";
+                    System.out.println("Gotten the names");
+
+                    (new AsyncTask<String, Void, Void>(){
+                        @Override
+                        protected Void doInBackground(String... params) {
+                            Communicator communicator = new Communicator();
+                            communicator.postNewMobileUserAPI(params[0], params[1], params[2],
+                                    params[3], params[4], params[5], params[6],
+                                    new Callback<RegisterResponse>() {
+                                        @Override
+                                        public void success(RegisterResponse registerResponse, Response response) {
+                                            System.out.println("Success with registration");
+                                        }
+
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            Log.d(TAG, "Registration with server Failed");
+
+                                        }
+                                    });
+                            return null;
+                        }
+                    }).execute(firstName, surname, fbMail, fbMail, facebookID, null);
+                }
+            }
+        };
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,5 +152,39 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        registerButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, loginResult.toString());
+                String userID = AccessToken.getCurrentAccessToken().getUserId();
+                Log.d(TAG, "User ID is: " + userID);
+            }
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "User Cancelled");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, error.toString());
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        profileTracker.stopTracking();
     }
 }
