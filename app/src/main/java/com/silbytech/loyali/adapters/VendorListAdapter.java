@@ -49,14 +49,11 @@ public class VendorListAdapter extends BaseAdapter {
         TextView storePhone = (TextView)v.findViewById(R.id.txtViewPhone);
         TextView storeType = (TextView)v.findViewById(R.id.txtStoreType);
 
-
-
         //Set text for the TextViews
         storeName.setText(vendorsList.get(position).getStoreName());
         storeLocation.setText(vendorsList.get(position).getLocation());
         storePhone.setText(vendorsList.get(position).getPhone());
         storeType.setText(vendorsList.get(position).getStoreType());
-
 
         //Save Vendor id to tag
         v.setTag(vendorsList.get(position).getId());
