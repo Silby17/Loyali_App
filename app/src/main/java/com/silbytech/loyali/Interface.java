@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 
+import com.silbytech.loyali.entities.VendorSerializable;
 import com.silbytech.loyali.responses.RegisterResponse;
 import com.silbytech.loyali.responses.ResultResponse;
 import java.util.List;
@@ -56,8 +57,9 @@ public interface Interface {
                         Callback<ResultResponse> serverResponse);
 
 
-    @GET("/vendors/list/")
-    void getVendorsList(@Header("Authorization") String token, Callback<List<VendorEntitySerializable>> serverResponse);
+    @GET("/vendor/")
+    void getVendorsList(Callback<List<VendorSerializable>> serverResponse);
+
 
     //This will get a list of subscriptions by sending the Customer_id
     @GET("/customers/vendor-subscription/list/")

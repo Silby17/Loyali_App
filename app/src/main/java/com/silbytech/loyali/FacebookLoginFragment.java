@@ -18,6 +18,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.silbytech.loyali.responses.RegisterResponse;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -43,35 +44,37 @@ public class FacebookLoginFragment extends Fragment {
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            String fullName = profile.getFirstName() + " " + profile.getLastName();
+            String firstName = profile.getFirstName();
+            String lastName = profile.getLastName();
             String userId = profile.getId();
+            //These will be made up password and email for the facebook user.
+            String fbPass = firstName + " " + lastName;
+            String fbUserEmail = firstName + lastName + "@loyali.com";
+            String tempPush = "null";
 
-/*            (new AsyncTask<String, Void, Void>() {
+            (new AsyncTask<String, Void, Void>(){
                 @Override
                 protected Void doInBackground(String... params) {
                     Communicator communicator = new Communicator();
-                    communicator.newFBUserPost(params[0], params[1], new Callback<RegisterResponse>() {
-                        @Override
-                        public void success(RegisterResponse registerResponse, Response response) {
-                           *//* if(registerResponse.getResult().equals("1") || registerResponse.getResult().equals("-1")){
-                                SharedPreferences pref = getActivity().getSharedPreferences(PREFS, 0);
-                                pref.edit().putBoolean("logged-in", true).apply();
-                                pref.edit().putString("customer_id", registerResponse.getCustomer_id()).apply();
-                                //Starts the new Main Menu Activity
-                                Intent i = new Intent(getActivity(), MainMenuActivity.class);
-                                FacebookLoginFragment.this.startActivity(i);
-                                getActivity().finish();
-                            }*//*
-                        }
-                        @Override
-                        public void failure(RetrofitError error) {
-                            Toast.makeText(getApplicationContext(),
-                                    R.string.connectionError, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    communicator.postNewMobileUserAPI(params[0], params[1], params[2],
+                            params[3], params[4], params[5], params[6],
+                            new Callback<RegisterResponse>() {
+                                @Override
+                                public void success(RegisterResponse registerResponse, Response response) {
+                                    if(response.getStatus() == 200){
+                                        System.out.println("Working");
+                                    }
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Toast.makeText(getApplicationContext(),
+                                            R.string.connectionError, Toast.LENGTH_SHORT).show();
+                                }
+                            });
                     return null;
                 }
-            }).execute(fullName, userId);*/
+            }).execute(firstName, lastName, fbUserEmail, userId, fbPass, userId, tempPush);
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 
+import com.silbytech.loyali.entities.VendorSerializable;
 import com.silbytech.loyali.responses.RegisterResponse;
 import com.silbytech.loyali.responses.ResultResponse;
 import com.silbytech.loyali.entities.VendorEntitySerializable;
@@ -12,9 +13,9 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://192.168.1.16:8080/";
-    private static final String KROCOAPI = "http://192.168.1.96:8000/krokoapi";
-    private static final String KROKO = "http://192.168.1.227:8000/kroko";
+    private static final String SERVER_URL = "http://192.168.1.14:8000/loyali";
+    private static final String LOYALI_API = "http://192.168.1.12:8000/loyaliapi";
+    private static final String LOYALI_URL = "http://192.168.1.13:8000/kroko";
 
     /****************************************************************************************
      *                                                                      -----Tested------
@@ -32,7 +33,7 @@ public class Communicator {
                               String username, String password, String facebook,
                               String pushKey, Callback<RegisterResponse> callback){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(KROCOAPI)
+                .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Interface comInterface = restAdapter.create(Interface.class);
@@ -77,6 +78,15 @@ public class Communicator {
                 .build();
         Interface comInterface = restAdapter.create(Interface.class);
         comInterface.postCheckCreds(email, password, callback);
+    }
+
+    void getVendorList(Callback<List<VendorSerializable>> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(SERVER_URL)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface comInterface = restAdapter.create(Interface.class);
+        comInterface.getVendorsList(serverResponse);
     }
 
 
