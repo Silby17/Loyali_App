@@ -20,6 +20,13 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp" />
 
+            <Button
+                android:id="@+id/TMPSplashbtn"
+                android:text="Splash Screen"
+                android:layout_below="@+id/TMPbtnVendorList"
+                android:layout_centerHorizontal="true"
+                android:layout_width="200dp"
+                android:layout_height="50dp" />
 
         </RelativeLayout>
 
