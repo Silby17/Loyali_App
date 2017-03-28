@@ -39,8 +39,16 @@
     <RelativeLayout
         android:id="@+id/frag1"
         android:layout_below="@id/fragHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="90dp">
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_centerVertical="true"
+            android:id="@+id/fb_register_btn"
+            android:layout_height="70dp"
+            android:layout_width="match_parent"/>
+
+
     </RelativeLayout>
 
     <!-- The fragment that holds the separator -->

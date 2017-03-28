@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -29,6 +32,21 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fbLoginFrga"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fragHeader">
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_centerVertical="true"
+            android:id="@+id/fb_login_bn_login"
+            android:layout_height="70dp"
+            android:layout_width="match_parent"/>
+
+    </RelativeLayout>
+
 
 
 
