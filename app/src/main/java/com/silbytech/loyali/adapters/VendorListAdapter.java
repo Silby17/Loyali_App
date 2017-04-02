@@ -20,7 +20,7 @@ public class VendorListAdapter extends BaseAdapter {
     //Deceleration of Variables
     private Context context;
     private List<VendorSerializable> vendorsList;
-    private String MEDIA_URL = "http://192.168.1.14:8000";
+    private String MEDIA_URL = "http://192.168.1.13:8000";
 
     public VendorListAdapter(Context context, List<VendorSerializable> vendorsList) {
         this.context = context;
