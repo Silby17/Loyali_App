@@ -20,7 +20,7 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_menu_fragment);
+        setContentView(R.layout.main_menu_fragments);
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -34,12 +34,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
        /* // Adds Rewards Page to ViewPager
         adapter.addFragment(null, "My Rewards");
-
+*/
         // Adds Vendor List Page to ViewPager
-        adapter.addFragment(null, "Around ME");*/
+        adapter.addFragment(VendorListFragment.newInstance(), "Stores");
 
         // Adds Subscriptions Page to ViewPager
-        adapter.addFragment(null, "My Vendors");
+        //adapter.addFragment(null, "My Vendors");
 
         viewPager.setAdapter(adapter);
 
