@@ -1,3 +1,12 @@
 <resources>
+    <string name="facebook_app_id">176498166198138</string>
     <string name="app_name">Loyali</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or_via_email">or via Email</string>
+    <string name="connectionError">Connection Error</string>
+    <string name="errorMissingInfo">Enter in all your information</string>
+    <string name="passMisMatch">Passwords do not match</string>
+    <string name="view_all_vendors">View all Vendors</string>
 </resources>
