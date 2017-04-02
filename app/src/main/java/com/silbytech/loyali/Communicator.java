@@ -13,8 +13,8 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://192.168.1.14:8000/loyali";
-    private static final String LOYALI_API = "http://192.168.1.12:8000/loyaliapi";
+    private static final String SERVER_URL = "http://192.168.1.13:8000/loyali";
+    private static final String LOYALI_API = "http://192.168.1.13:8000/loyaliapi";
     private static final String LOYALI_URL = "http://192.168.1.13:8000/kroko";
 
     /****************************************************************************************
