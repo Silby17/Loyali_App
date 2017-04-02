@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="wallet_bright_foreground_holo_light">#ff000000</color>
+    <color name="loyali_red">#b80102</color>
 </resources>
