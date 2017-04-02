@@ -38,25 +38,19 @@ public class VendorListActivity extends Activity {
                 communicator.getVendorList(new Callback<List<VendorSerializable>>() {
                     @Override
                     public void success(List<VendorSerializable> vendorSerializable, Response response) {
-                        System.out.println("Done");
                         lvVendors = (ListView)findViewById(R.id.lstViewVendors);
                         vendorList = vendorSerializable;
 
                         //Init Adapter
                         vendorListAdapter = new VendorListAdapter(getApplicationContext(), vendorList);
                         lvVendors.setAdapter(vendorListAdapter);
-
-
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         System.out.println("Failed man sorry ");
-
                     }
                 });
-
-
                 return null;
             }
         }).execute();
