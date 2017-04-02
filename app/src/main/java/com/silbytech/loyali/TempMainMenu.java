@@ -12,6 +12,7 @@ import android.widget.Button;
 public class TempMainMenu extends Activity {
     Button vendors;
     Button btnSplash;
+    Button btnViewPager;
 
 
     @Override
@@ -21,6 +22,7 @@ public class TempMainMenu extends Activity {
 
         vendors = (Button)findViewById(R.id.TMPbtnVendorList);
         btnSplash = (Button)findViewById(R.id.TMPSplashbtn);
+        btnViewPager = (Button)findViewById(R.id.TMPViewPager);
 
         vendors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +37,15 @@ public class TempMainMenu extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(TempMainMenu.this, SplashActivity.class);
                 TempMainMenu.this.startActivity(i);
+            }
+        });
 
+
+        btnViewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TempMainMenu.this, MainMenuActivity.class);
+                TempMainMenu.this.startActivity(i);
             }
         });
     }
