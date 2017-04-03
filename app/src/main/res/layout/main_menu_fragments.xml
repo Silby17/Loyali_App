@@ -15,9 +15,10 @@
             android:id="@+id/tabs"
             app:tabTextAppearance="@style/CustomTabText"
             app:tabTextColor="@color/wallet_bright_foreground_holo_light"
-            app:tabSelectedTextColor="@color/wallet_bright_foreground_holo_light"
+            app:tabSelectedTextColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>
