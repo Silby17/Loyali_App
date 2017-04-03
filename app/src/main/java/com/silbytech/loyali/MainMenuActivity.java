@@ -38,12 +38,12 @@ public class MainMenuActivity extends AppCompatActivity {
         // Adds Vendor List Page to ViewPager
         adapter.addFragment(VendorListFragment.newInstance(), "Stores");
 
-        // Adds Subscriptions Page to ViewPager
-        //adapter.addFragment(null, "My Vendors");
+        // Adds SubscriptionSerializable Page to ViewPager
+        adapter.addFragment(SubscriptionListFragment.newInstance(), "My Stores");
 
         viewPager.setAdapter(adapter);
 
         //Sets the fragment at index 1 to be the opening fragment
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
     }
 }
