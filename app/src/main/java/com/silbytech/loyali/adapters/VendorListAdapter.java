@@ -49,7 +49,7 @@ public class VendorListAdapter extends BaseAdapter {
         TextView storeLocation = (TextView) v.findViewById(R.id.txtViewVendorLocation);
         TextView storePhone = (TextView) v.findViewById(R.id.txtViewPhone);
         TextView storeType = (TextView) v.findViewById(R.id.txtStoreType);
-        TextView card1 = (TextView) v.findViewById(R.id.txtCard1);
+        TextView card1 = (TextView) v.findViewById(R.id.txtCard1Header);
         TextView card2 = (TextView) v.findViewById(R.id.txtCard2);
         ImageView storeLogo = (ImageView) v.findViewById(R.id.imgVendorLogo);
 
