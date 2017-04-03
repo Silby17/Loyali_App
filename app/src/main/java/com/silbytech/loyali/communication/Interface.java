@@ -1,6 +1,8 @@
-package com.silbytech.loyali;
+package com.silbytech.loyali.communication;
 
-import com.silbytech.loyali.entities.VendorSerializable;
+import com.silbytech.loyali.entities.SubscriptionSerializable;
+import com.silbytech.loyali.entities.VendorCardSerializer;
+import com.silbytech.loyali.responses.MessageResponse;
 import com.silbytech.loyali.responses.RegisterResponse;
 import com.silbytech.loyali.responses.ResultResponse;
 import java.util.List;
@@ -8,10 +10,8 @@ import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.Query;
-import com.silbytech.loyali.entities.VendorEntitySerializable;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -57,15 +57,20 @@ public interface Interface {
                         Callback<ResultResponse> serverResponse);
 
 
-    @GET("/vendor/")
-    void getVendorsList(Callback<List<VendorSerializable>> serverResponse);
+
+    @GET("/mobile/vendorsAndCards/") /*Working and tested*/
+    void getVendorsWithCards(Callback<List<VendorCardSerializer>> serverResponse);
 
 
-    //This will get a list of subscriptions by sending the Customer_id
-    @GET("/customers/vendor-subscription/list/")
-    void getSubscriptions(@Query("customer_id") int customer_id, Callback<List<VendorEntitySerializable>> serverResponse);
+    @GET("/mobile/subscriptions/")
+    void getSubscriptions(@Query("customer_id") String customer_id, Callback<List<SubscriptionSerializable>> serverResponse);
 
 
+    @FormUrlEncoded
+    @POST("/createSubscription/")
+    void postCreateSubscription(@Field("vendor_id") String vendor_id,
+                                @Field("customer_id") String customer_id,
+                                Callback<MessageResponse> serverResponse);
 
   /*  @FormUrlEncoded
     @POST("/getVendors")
@@ -73,11 +78,7 @@ public interface Interface {
                         Callback<VendorListResponse> vendorListResponse);
 
 
-    @FormUrlEncoded
-    @POST("/customers/subscribe/")
-    void postNewSubscription(@Field("vendor_user_id") String vendor_id,
-                             @Field("customer_id") String customer_id,
-                             Callback<ResultResponse> serverResponse);
+
 
 
     @GET("/cardsList/")
