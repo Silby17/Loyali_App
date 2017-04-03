@@ -8,7 +8,7 @@ import java.util.List;
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
-public class Subscriptions implements Serializable {
+public class SubscriptionSerializable implements Serializable {
 
     @SerializedName("vendor_user_id")
     private int vendor_user_id;
@@ -19,7 +19,7 @@ public class Subscriptions implements Serializable {
     @SerializedName("cards_in_use")
     private List<CardInUse> cardInUse;
 
-    public Subscriptions(int vendor_user_id, VendorSerializable vendor, List<CardInUse> cardInUse) {
+    public SubscriptionSerializable(int vendor_user_id, VendorSerializable vendor, List<CardInUse> cardInUse) {
         this.vendor_user_id = vendor_user_id;
         this.vendor = vendor;
         this.cardInUse = cardInUse;
