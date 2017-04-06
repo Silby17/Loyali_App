@@ -17,7 +17,7 @@ import java.util.List;
 public class SubscriptionListAdapter extends BaseAdapter {
     private Context context;
     private List<SubscriptionSerializable> subscriptionList;
-    private String MEDIA_URL = "http://192.168.1.12:8000";
+    private String MEDIA_URL = "http://192.168.1.33:8000";
 
     public SubscriptionListAdapter(Context context, List<SubscriptionSerializable> subscriptionList) {
         this.context = context;
