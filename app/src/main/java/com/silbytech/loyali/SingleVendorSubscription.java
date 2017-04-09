@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -120,5 +121,10 @@ public class SingleVendorSubscription extends AppCompatActivity {
             }
         }).execute();
 
+
+    }
+
+    public void cardOneClicked(View view){
+        System.out.println("sadasd");
     }
 }
