@@ -7,11 +7,12 @@
     <RelativeLayout
         android:id="@+id/vendorHeaderFrag"
         android:layout_width="match_parent"
-        android:layout_height="190dp">
+        android:layout_height="210dp">
 
         <RelativeLayout
             android:id="@+id/logoFrag"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:layout_width="80dp"
             android:layout_height="80dp">
 
@@ -28,7 +29,7 @@
         <RelativeLayout
             android:layout_below="@+id/logoFrag"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="110dp">
 
             <TextView
                 android:id="@+id/txtVendorTitle"
@@ -36,7 +37,7 @@
                 android:layout_height="30dp"
                 android:textColor="@android:color/black"
                 android:textSize="20dp"
-                android:text="title"
+                android:text="Loading..."
                 android:textAlignment="center"
                 android:layout_marginTop="10dp"/>
 
@@ -45,7 +46,7 @@
                 android:layout_height="25dp"
                 android:id="@+id/txtVendorType"
                 android:textColor="@android:color/black"
-                android:text="title"
+                android:text="Loading..."
                 android:textSize="15dp"
                 android:textAlignment="center"
                 android:layout_below="@+id/txtVendorTitle"
@@ -57,7 +58,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="20dp"
                 android:textColor="@android:color/black"
-                android:text="title"
+                android:text="Loading..."
                 android:textSize="15dp"
                 android:textAlignment="center"
                 android:layout_below="@+id/txtVendorType"/>
@@ -65,9 +66,9 @@
             <TextView
                 android:id="@+id/txtVendorPhone"
                 android:layout_width="fill_parent"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:textColor="@android:color/black"
-                android:text="title"
+                android:text="Loading..."
                 android:textSize="15dp"
                 android:textAlignment="center"
                 android:layout_below="@+id/txtVendorLocation"
@@ -84,24 +85,113 @@
         android:background="#b80102"/>
 
 
+
+
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/vendorHeaderFrag"
+        android:layout_below="@+id/viewSeperator"
+        android:id="@+id/rightLayout"
         android:layout_width="match_parent"
-        android:layout_height="380dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:background="#ffffa2"
-            android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"/>
 
+        <!-- The linear layout for both cards -->
         <LinearLayout
-            android:background="#ccc"
+            android:clickable="true"
+            android:paddingTop="10dp"
+            android:id="@+id/lLayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/card1TopBox"
+                android:background="#e7e8ea"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textSize="20dp"
+                    android:textAlignment="center"
+                    android:id="@+id/card1Header"
+                    android:textColor="@android:color/black"
+                    android:layout_centerHorizontal="true"
+                    android:text="Card 1 Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <GridLayout
+                    android:useDefaultMargins="true"
+                    android:rowCount="2"
+                    android:columnCount="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true">
+
+
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+
+                    <ImageView
+                        android:layout_rowSpan="2"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/loyali_logo"/>
+                </GridLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <!-- The Linear Layout for the bottom card -->
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/lLayoutBottom"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
             android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"/>
+            android:background="#00ff00" >
+
+            <TextView
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:id="@+id/card2Header"
+                android:textColor="@android:color/black"
+                android:layout_centerHorizontal="true"
+                android:text="Comgin Soon"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
