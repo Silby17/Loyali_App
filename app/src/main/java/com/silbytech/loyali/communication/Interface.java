@@ -72,6 +72,12 @@ public interface Interface {
                                 @Field("customer_id") String customer_id,
                                 Callback<MessageResponse> serverResponse);
 
+
+    @GET("/mobile/subscriptions/byCardID/")
+    void getSubscriptionCardsByVendorID(@Query("customer_id") String customer_id,
+                                        @Query("vendor_id") String vendor_id,
+                                        Callback<List<SubscriptionSerializable>> serverResponse);
+
   /*  @FormUrlEncoded
     @POST("/getVendors")
     void postGetVendors(@Field("command") String command,
