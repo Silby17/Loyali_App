@@ -22,7 +22,6 @@
                 android:id="@+id/imgVendorLogo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/loyali_logo"
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
@@ -85,8 +84,6 @@
         android:background="#b80102"/>
 
 
-
-
     <LinearLayout
         android:layout_below="@+id/viewSeperator"
         android:id="@+id/rightLayout"
@@ -116,11 +113,12 @@
                     android:id="@+id/card1Header"
                     android:textColor="@android:color/black"
                     android:layout_centerHorizontal="true"
-                    android:text="Card 1 Title"
+                    android:text="Coming Soon..."
                     android:layout_width="match_parent"
                     android:layout_height="30dp" />
 
                 <GridLayout
+                    android:id="@+id/gridLayoutTop"
                     android:useDefaultMargins="true"
                     android:rowCount="2"
                     android:columnCount="5"
@@ -129,40 +127,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true">
 
-
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
-
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
-
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
-
-                    <ImageView
-                        android:layout_rowSpan="2"
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:src="@drawable/loyali_logo"/>
                 </GridLayout>
             </RelativeLayout>
         </LinearLayout>
@@ -176,7 +140,7 @@
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:background="#00ff00" >
+            android:background="#e7e8ea">
 
             <TextView
                 android:textSize="20dp"
@@ -184,14 +148,10 @@
                 android:id="@+id/card2Header"
                 android:textColor="@android:color/black"
                 android:layout_centerHorizontal="true"
-                android:text="Comgin Soon"
+                android:text="Coming Soon..."
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
 </RelativeLayout>
