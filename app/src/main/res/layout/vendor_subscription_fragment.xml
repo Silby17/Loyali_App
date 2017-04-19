@@ -94,6 +94,7 @@
 
         <!-- The linear layout for both cards -->
         <LinearLayout
+            android:onClick="cardOneClicked"
             android:clickable="true"
             android:paddingTop="10dp"
             android:id="@+id/lLayoutTop"
