@@ -5,7 +5,6 @@ import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
 import com.silbytech.loyali.responses.RegisterResponse;
-import com.silbytech.loyali.responses.ResultResponse;
 import java.util.List;
 import retrofit.Callback;
 import retrofit.RestAdapter;
