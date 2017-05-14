@@ -1,11 +1,12 @@
 package com.silbytech.loyali;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.silbytech.loyali.adapters.SubscriptionListAdapter;
@@ -28,9 +29,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
     private SharedPreferences preferences;
     String customer_id;
 
-
     public SubscriptionListFragment() {}
-
 
     public static SubscriptionListFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,22 +64,35 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                 subscriptionList = subscriptionSerializables;
                                 subscriptionAdapter = new SubscriptionListAdapter(getApplicationContext(), subscriptionList);
                                 lvSubscriptions.setAdapter(subscriptionAdapter);
-                            }
 
+                                lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        final String vendor_id = view.getTag().toString();
+                                        Intent intent = new Intent(getApplicationContext(), SingleVendorSubscription.class);
+                                        intent.putExtra("vendor_id", vendor_id);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
                             @Override
                             public void failure(RetrofitError error) {
-                                Toast.makeText(getApplicationContext(),
-                                        R.string.connectionError, Toast.LENGTH_SHORT).show();
+                                if(error.getResponse().getStatus() == 404){
+                                    Toast.makeText(getApplicationContext(),
+                                            R.string.invalidUser, Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(),
+                                            R.string.connectionError, Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
-
                 return null;
             }
         }).execute();
     }
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.subscription_listview, container, false);
