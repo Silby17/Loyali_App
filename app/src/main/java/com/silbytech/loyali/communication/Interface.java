@@ -36,13 +36,11 @@ public interface Interface {
                         @Field("push_api_key") String pushKey,
                         Callback<RegisterResponse> callback);
 
-    /*
     @FormUrlEncoded
-    @POST("/api-token-auth/")
+    @POST("/login/")
     void loginUser(@Field("username") String username,
                    @Field("password") String password,
-                   Callback<LoginToken> serverResponse);
-*/
+                   Callback<RegisterResponse> serverResponse);
 
     @FormUrlEncoded
     @POST("/newFBUser")
@@ -58,7 +56,7 @@ public interface Interface {
 
 
 
-    @GET("/mobile/vendorsAndCards/") /*Working and tested*/
+    @GET("/mobile/vendorsAndCards/") /*Working and tested (API)*/
     void getVendorsWithCards(Callback<List<VendorCardSerializer>> serverResponse);
 
 
