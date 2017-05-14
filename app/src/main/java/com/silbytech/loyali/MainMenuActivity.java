@@ -27,16 +27,12 @@ public class MainMenuActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void setupViewPager(ViewPager viewPager){
         // Creates a new View Pager Adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-       /* // Adds Rewards Page to ViewPager
-        adapter.addFragment(null, "My Rewards");
-*/
         // Adds Vendor List Page to ViewPager
         adapter.addFragment(VendorListFragment.newInstance(), "Stores");
 
@@ -55,6 +51,4 @@ public class MainMenuActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
-
 }
