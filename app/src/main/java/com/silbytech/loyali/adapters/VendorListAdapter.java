@@ -11,16 +11,14 @@ import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
-
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
-
 public class VendorListAdapter extends BaseAdapter {
-    //Deceleration of Variables
-    private Context context;
+    private String MEDIA_URL = "http://192.168.1.13:8000";
     private List<VendorCardSerializer> vendorsList;
-    private String MEDIA_URL = "http://192.168.1.12:8000";
+    private Context context;
+
 
     public VendorListAdapter(Context context, List<VendorCardSerializer> vendorsList) {
         this.context = context;
@@ -47,8 +45,8 @@ public class VendorListAdapter extends BaseAdapter {
         View v = View.inflate(context, R.layout.vendor_fragment, null);
         TextView storeName = (TextView) v.findViewById(R.id.txtViewVendorName);
         TextView storeLocation = (TextView) v.findViewById(R.id.txtViewVendorLocation);
-        TextView storePhone = (TextView) v.findViewById(R.id.txtViewPhone);
-        TextView storeType = (TextView) v.findViewById(R.id.txtStoreType);
+        TextView storePhone = (TextView) v.findViewById(R.id.txtVendorPhone);
+        TextView storeType = (TextView) v.findViewById(R.id.txtVendorType);
         TextView card1 = (TextView) v.findViewById(R.id.txtCard1Header);
         TextView card2 = (TextView) v.findViewById(R.id.txtCard2);
         ImageView storeLogo = (ImageView) v.findViewById(R.id.imgVendorLogo);
@@ -66,7 +64,6 @@ public class VendorListAdapter extends BaseAdapter {
         } else if (vendorsList.get(position).getCards().size() == 1){
             card1.setText(vendorsList.get(position).getCards().get(0).getDescription());
         }
-
         //Save Vendor id to tag
         v.setTag(vendorsList.get(position).getId());
         return v;
