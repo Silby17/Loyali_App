@@ -6,7 +6,6 @@ import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
 import com.silbytech.loyali.responses.RegisterResponse;
 import com.silbytech.loyali.responses.ResultResponse;
-
 import java.util.List;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -16,8 +15,8 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://192.168.1.12:8000/loyali";
-    private static final String LOYALI_API = "http://192.168.1.12:8000/loyaliapi";
+    private static final String SERVER_URL = "http://192.168.1.13:8000/loyali";
+    private static final String LOYALI_API = "http://192.168.1.13:8000/loyaliapi";
 
     /****************************************************************************************
      *                                                                      -----Tested------
@@ -43,15 +42,14 @@ public class Communicator {
     }
 
 
-    /*void userLogin(String username, String password, Callback<LoginToken> callback){
+    void userLogin(String username, String password, Callback<RegisterResponse> callback){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(KROCOAPI)
+                .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Interface comInterface = restAdapter.create(Interface.class);
         comInterface.loginUser(username, password, callback);
-    }*/
-
+    }
 
 
     /************************************************************************
@@ -71,18 +69,6 @@ public class Communicator {
         comInterface.postNewFBUser(name, userID, callback);
     }
 
-
-    void checkUserLogin(String email, String password,
-                        Callback<ResultResponse> callback){
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(SERVER_URL)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
-        Interface comInterface = restAdapter.create(Interface.class);
-        comInterface.postCheckCreds(email, password, callback);
-    }
-
-
     void getVendorsWithCards(Callback<List<VendorCardSerializer>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -93,8 +79,7 @@ public class Communicator {
     }
 
 
-
-    public void postCreateSubscription(String vendor_id, String customer_id,
+    void postCreateSubscription(String vendor_id, String customer_id,
                                        Callback<MessageResponse> callback) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -114,19 +99,13 @@ public class Communicator {
     }
 
 
-
-/*
-    public void getCardsList(Callback<List<CardSerializable>> serverResponse){
+    void getSubscriptionCardsByVendorID(String customer_id, String vendor_id,
+                                        Callback<List<SubscriptionSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(KROKO)
+                .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
-        Interface interfce = restAdapter.create(Interface.class);
-        interfce.getCardsList(serverResponse);
+        Interface inter = restAdapter.create(Interface.class);
+        inter.getSubscriptionCardsByVendorID(customer_id, vendor_id, serverResponse);
     }
-*/
-
-
-
-
 }
