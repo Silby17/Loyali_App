@@ -14,6 +14,8 @@
     <string name="coming_soon">Coming Soon</string>
     <string name="save_to_favourites">Do you want to add this Store to your favourites?</string>
     <string name="add_to_favourites">Add Store to favourites</string>
+    <string name="deleteSubscriptionTitle">Remove from Favorites</string>
+    <string name="deleteSubscription">Are you sure you want to remove this from Favorites?</string>
     <string name="qrDescription">The QR code can be found at the check-out. As a staff member for a punch and they\'ll get it for you.</string>
     <string name="user_not_exist">The User does not exist</string>
     <string name="invalidUser">Error: Invalid User</string>
