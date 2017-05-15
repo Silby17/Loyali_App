@@ -1,7 +1,6 @@
 package com.silbytech.loyali;
 
 import android.content.SharedPreferences;
-import android.media.MediaActionSound;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +9,10 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -40,12 +37,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
     TextView card1Header;
     TextView card2Header;
     GridLayout gridLayoutTop;
-
-    Integer[] redImages = {
-            R.drawable.loyali_logo, R.drawable.loyali_logo, R.drawable.loyali_logo,
-            R.drawable.loyali_logo, R.drawable.loyali_logo,R.drawable.loyali_logo,
-            R.drawable.loyali_logo,R.drawable.loyali_logo,R.drawable.loyali_logo,
-            R.drawable.loyali_logo};
+    GridLayout gridLayoutBottom;
 
 
     @Override
@@ -60,6 +52,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
         card1Header = (TextView)findViewById(R.id.card1Header);
         card2Header = (TextView)findViewById(R.id.card2Header);
         gridLayoutTop = (GridLayout)findViewById(R.id.gridLayoutTop);
+        gridLayoutBottom = (GridLayout)findViewById(R.id.gridLayoutBottom);
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
@@ -82,49 +75,69 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                 txtPhone.setText(subscriptionSerializables.get(0).getVendor().getPhone());
                                 txtLocation.setText(subscriptionSerializables.get(0).getVendor().getLocation());
 
+                                /**Displays all the information of the first Card that's in Use**/
                                 if(subscriptionSerializables.get(0).getCardInUse().size() != 0){
                                     cardOneID = subscriptionSerializables.get(0).getCardInUse().get(0).getId();
                                     card1Header.setText(subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getDescription());
+                                    int card1Max = subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getMax();
+                                    int card1Current = subscriptionSerializables.get(0).getCardInUse().get(0).getCurrent();
+                                    ImageView img;
+                                    int i;
+                                    for(i = 0; i < card1Current; i++){
+                                        img = new ImageView(getApplicationContext());
+                                        String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
+                                        Picasso.with(getApplicationContext()).load(redLogoURL).into(img);
+                                        gridLayoutTop.addView(img, 200, 200);
+                                    }
+                                    for(int j = i; j < card1Max; j++){
+                                        img = new ImageView(getApplicationContext());
+                                        //img.setImageResource(R.drawable.logo_grey_compressed);
+                                        String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
+                                        Picasso.with(getApplicationContext()).load(greyLogoURL).into(img);
+                                        gridLayoutTop.addView(img, 200, 200);
+                                    }
+
+
                                     try {
                                         cardTwoID = subscriptionSerializables.get(0).getCardInUse().get(1).getId();
-                                        card1Header.setText(subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getDescription());
+                                        card2Header.setText(subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getDescription());
+                                        int card2Max = subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getMax();
+                                        int card2Current = subscriptionSerializables.get(0).getCardInUse().get(1).getCurrent();
+                                        ImageView img2;
+                                        int m;
+                                        for(m = 0; m < card2Current; m++){
+                                            img2 = new ImageView(getApplicationContext());
+                                            String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
+                                            Picasso.with(getApplicationContext()).load(redLogoURL).into(img2);
+                                            gridLayoutBottom.addView(img2, 200, 200);
+                                        }
+                                        for(int j = i; j < card2Max; j++){
+                                            img2 = new ImageView(getApplicationContext());
+                                            String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
+                                            Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
+                                            gridLayoutBottom.addView(img2, 200, 200);
+                                        }
+
+
                                     } catch (NullPointerException e){
                                         System.out.println("Null pointer Exception, No card second card");
                                     }
-                                }
-                                int max = subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getMax();
-                                ImageView img;
-                                int i;
-                                for(i = 0; i < 6; i++){
-                                    img = new ImageView(getApplicationContext());
-                                    String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
-                                    //img.setImageResource(R.drawable.loyali_logo);
-                                    Picasso.with(getApplicationContext()).load(redLogoURL).into(img);
-                                    gridLayoutTop.addView(img, 200, 200);
-                                }
-                                for(int j = i; j < 10; j++){
-                                    img = new ImageView(getApplicationContext());
-                                    //img.setImageResource(R.drawable.logo_grey_compressed);
-                                    String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
-                                    Picasso.with(getApplicationContext()).load(greyLogoURL).into(img);
-                                    gridLayoutTop.addView(img, 200, 200);
                                 }
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
-                                System.out.println("failed");
-
+                                Toast.makeText(getApplicationContext(),
+                                        R.string.connectionError, Toast.LENGTH_SHORT).show();
                             }
                         });
                 return null;
             }
         }).execute();
-
-
     }
 
     public void cardOneClicked(View view){
-        System.out.println("sadasd");
+        Toast.makeText(getApplicationContext(),
+                "Card one Clicked", Toast.LENGTH_SHORT).show();
     }
 }
