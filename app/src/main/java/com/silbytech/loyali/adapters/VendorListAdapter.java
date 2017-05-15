@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Yosef Silberhaft
  ************************************/
 public class VendorListAdapter extends BaseAdapter {
-    private String MEDIA_URL = "http://192.168.1.13:8000";
+    private String MEDIA_URL = "http://192.168.137.1:8000";
     private List<VendorCardSerializer> vendorsList;
     private Context context;
 
