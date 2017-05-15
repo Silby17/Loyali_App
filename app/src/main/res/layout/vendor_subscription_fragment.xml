@@ -91,7 +91,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <!-- The linear layout for both cards -->
         <LinearLayout
             android:onClick="cardOneClicked"
@@ -143,15 +142,35 @@
             android:layout_weight="1"
             android:background="#e7e8ea">
 
-            <TextView
-                android:textSize="20dp"
-                android:textAlignment="center"
-                android:id="@+id/card2Header"
-                android:textColor="@android:color/black"
-                android:layout_centerHorizontal="true"
-                android:text="Coming Soon..."
+            <RelativeLayout
+                android:id="@+id/card2TopBox"
+                android:background="#e7e8ea"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textSize="20dp"
+                    android:textAlignment="center"
+                    android:id="@+id/card2Header"
+                    android:textColor="@android:color/black"
+                    android:layout_centerHorizontal="true"
+                    android:text="Coming Soon..."
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <GridLayout
+                    android:id="@+id/gridLayoutBottom"
+                    android:useDefaultMargins="true"
+                    android:rowCount="2"
+                    android:columnCount="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true">
+
+                </GridLayout>
+            </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>
