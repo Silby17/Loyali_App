@@ -28,11 +28,11 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  ************************************/
 public class VendorListFragment extends android.support.v4.app.Fragment {
     //Deceleration of Variables
-    private ListView lvVendors;
-    private VendorListAdapter vendorListAdapter;
     private List<VendorCardSerializer> vendorCardsList;
     public static final String PREFS = "prefs";
+    private VendorListAdapter vendorListAdapter;
     private SharedPreferences preferences;
+    private ListView lvVendors;
     String customer_id;
 
     public VendorListFragment() {}
@@ -138,8 +138,14 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                     }
                     @Override
                     public void failure(RetrofitError error) {
-                        Toast.makeText(getApplicationContext(),
-                                R.string.connectionError, Toast.LENGTH_SHORT).show();
+                        if(error.getKind().name().equals("NETWORK")){
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.networkError, Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.connectionError, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 return null;
