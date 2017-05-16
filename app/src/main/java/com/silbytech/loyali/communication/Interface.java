@@ -16,13 +16,11 @@ import retrofit.http.Query;
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
-
 /***************************************************************************
  * This Interface will define all the Posting methods that will be used
  * to send data to the web server using the POST method
  ***************************************************************************/
 public interface Interface {
-
 
     /*TESTED*/
     @FormUrlEncoded
@@ -61,7 +59,8 @@ public interface Interface {
 
 
     @GET("/mobile/subscriptions/")
-    void getSubscriptions(@Query("customer_id") String customer_id, Callback<List<SubscriptionSerializable>> serverResponse);
+    void getSubscriptions(@Query("customer_id") String customer_id,
+                          Callback<List<SubscriptionSerializable>> serverResponse);
 
 
     @FormUrlEncoded
@@ -70,21 +69,16 @@ public interface Interface {
                                 @Field("customer_id") String customer_id,
                                 Callback<MessageResponse> serverResponse);
 
+    @FormUrlEncoded
+    @POST("/deleteSubscription/")
+    void deleteSubscriptionPost(@Field("customer_id") String customerID,
+                                @Field("vendor_id") String vendorID,
+                                Callback<MessageResponse> serverResponse);
+
 
     @GET("/mobile/subscriptions/byCardID/")
     void getSubscriptionCardsByVendorID(@Query("customer_id") String customer_id,
                                         @Query("vendor_id") String vendor_id,
                                         Callback<List<SubscriptionSerializable>> serverResponse);
 
-  /*  @FormUrlEncoded
-    @POST("/getVendors")
-    void postGetVendors(@Field("command") String command,
-                        Callback<VendorListResponse> vendorListResponse);
-
-
-
-
-
-    @GET("/cardsList/")
-    void getCardsList(Callback<List<CardSerializable>> serverResponse);*/
 }
