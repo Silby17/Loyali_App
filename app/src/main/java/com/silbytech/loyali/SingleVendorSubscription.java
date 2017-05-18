@@ -1,5 +1,7 @@
 package com.silbytech.loyali;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +12,10 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
+import com.silbytech.loyali.responses.MessageResponse;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 import retrofit.Callback;
@@ -24,11 +29,13 @@ public class SingleVendorSubscription extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
     private String MEDIA_URL = "http://192.168.137.1:8000";
     public static final String PREFS = "prefs";
+    public int buttonClicked = 0;
     private SharedPreferences preferences;
     private int cardOneID;
     private int cardTwoID;
     private String customer_id;
     private String vendor_id;
+    Activity activity = this;
     ImageView logo;
     TextView txtTitle;
     TextView txtType;
@@ -58,6 +65,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
         this.customer_id = preferences.getString("customer_id", "");
         this.vendor_id = getIntent().getStringExtra("vendor_id");
+
 
         (new AsyncTask<String, Void, Void>(){
             @Override
@@ -128,16 +136,95 @@ public class SingleVendorSubscription extends AppCompatActivity {
         }).execute();
     }
 
+
     public void cardOneClicked(View view){
-        Toast.makeText(getApplicationContext(),
-                "Card one Clicked with ID: " + Integer.toString(cardOneID), Toast.LENGTH_SHORT).show();
-        //Send Card QR code to the server - Server side will check code and if correct
-        // increase the current card and send back a 200 Response
+        buttonClicked = 1;
+        IntentIntegrator integrator = new IntentIntegrator(activity);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("Scan QR Code");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
+    }
+
+    public void cardTwoClicked(View view){
+        buttonClicked = 2;
+        IntentIntegrator integrator = new IntentIntegrator(activity);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("Scan QR Code");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
     }
 
 
-    public void cardTwoClicked(View view){
-        Toast.makeText(getApplicationContext(),
-                "Card Two Clicked with ID: " + Integer.toString(cardTwoID), Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String cardID;
+        if(buttonClicked == 1){
+            cardID = Integer.toString(cardOneID);
+        }
+        else{
+            cardID = Integer.toString(cardTwoID);
+        }
+        if (result != null){
+            if(result.getContents() == null){
+                Toast.makeText(this, "You Cancelled Scan", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                (new AsyncTask<String, Void, Void>(){
+                    @Override
+                    protected Void doInBackground(String... params) {
+                        Communicator communicator = new Communicator();
+                        communicator.punchCard(params[0], params[1], params[2],
+                                new Callback<MessageResponse>() {
+                                    @Override
+                                    public void success(MessageResponse messageResponse, Response response) {
+                                        //Barcode Error
+                                        if(response.getStatus() == 401){
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.barcodeError, Toast.LENGTH_SHORT).show();
+                                        }
+                                        //User doesn't Exists
+                                        else if(response.getStatus() == 404){
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.invalidUser, Toast.LENGTH_SHORT).show();
+                                        }
+                                        //There is an error with that Card
+                                        else if(response.getStatus() == 400){
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.cardError, Toast.LENGTH_SHORT).show();
+                                        }
+                                        else if(response.getStatus() == 202){
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.freeCoffee, Toast.LENGTH_SHORT).show();
+                                        }
+                                        else if(response.getStatus() == 201){
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.punched, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getApplicationContext(),
+                                                R.string.networkError, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        return null;
+                    }
+                }).execute(customer_id, result.getContents(), cardID);
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+        buttonClicked = 0;
     }
 }
