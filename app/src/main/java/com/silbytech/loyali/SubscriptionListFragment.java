@@ -1,7 +1,10 @@
 package com.silbytech.loyali;
 import com.silbytech.loyali.adapters.SubscriptionListAdapter;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
+import com.silbytech.loyali.responses.MessageResponse;
 import static com.facebook.FacebookSdk.getApplicationContext;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -48,7 +51,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
 
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         (new AsyncTask<String, Void, Void>(){
@@ -72,6 +75,66 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                         Intent intent = new Intent(getApplicationContext(), SingleVendorSubscription.class);
                                         intent.putExtra("vendor_id", vendor_id);
                                         startActivity(intent);
+                                    }
+                                });
+
+                                lvSubscriptions.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                    @Override
+                                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        final String vendor_ID = view.getTag().toString();
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                                        alertDialogBuilder.setTitle(R.string.deleteSubscriptionTitle);
+                                        // set dialog message
+                                        alertDialogBuilder
+                                                .setMessage(R.string.deleteSubscription)
+                                                .setCancelable(false)
+                                                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,int id) {
+
+                                                        //This Async Task will Attempt to make a new subscription
+                                                        // between this mobile user and the vendor fragment they
+                                                        //have clicked on
+                                                        (new AsyncTask<String, Void, Void>(){
+                                                            @Override
+                                                            protected Void doInBackground(String... params) {
+                                                                Communicator communicator = new Communicator();
+                                                                communicator.deleteSubscriptionPost(params[0],
+                                                                        params[1],
+                                                                        new Callback<MessageResponse>() {
+                                                                            @Override
+                                                                            public void success(MessageResponse messageResponse,
+                                                                                                Response response) {
+                                                                                if(response.getStatus() == 200){
+                                                                                    Toast.makeText(getApplicationContext(),
+                                                                                            R.string.subDeleted, Toast.LENGTH_SHORT).show();
+                                                                                }
+                                                                            }
+                                                                            @Override
+                                                                            public void failure(RetrofitError error) {
+                                                                                Toast.makeText(getApplicationContext(),
+                                                                                        R.string.networkError, Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        });
+                                                                return null;
+                                                            }
+                                                        }).execute(customer_id, vendor_ID);
+
+                                                    }
+                                                })
+                                                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,int id) {
+                                                        System.out.println("here");
+                                                        // if this button is clicked, just close
+                                                        // the dialog box and do nothing
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                        // create alert dialog
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                                        // show it
+                                        alertDialog.show();
+                                        return true;
                                     }
                                 });
                             }
