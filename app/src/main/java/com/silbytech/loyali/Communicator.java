@@ -1,5 +1,4 @@
 package com.silbytech.loyali;
-
 import com.silbytech.loyali.communication.Interface;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
@@ -14,8 +13,8 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://192.168.1.13:8000/loyali";
-    private static final String LOYALI_API = "http://192.168.1.13:8000/loyaliapi";
+    private static final String SERVER_URL = "http://192.168.137.1:8000/loyali";
+    private static final String LOYALI_API = "http://192.168.137.1:8000/loyaliapi";
 
     /****************************************************************************************
      *                                                                      -----Tested------
@@ -88,6 +87,18 @@ public class Communicator {
         comInterface.postCreateSubscription(vendor_id, customer_id, callback);
     }
 
+
+    void deleteSubscriptionPost(String customerID, String vendorID,
+                                Callback<MessageResponse> callback){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface comInterface = restAdapter.create(Interface.class);
+        comInterface.deleteSubscriptionPost(customerID, vendorID, callback);
+    }
+
+
     void getSubscriptions(String customer_id, Callback<List<SubscriptionSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -106,5 +117,16 @@ public class Communicator {
                 .build();
         Interface inter = restAdapter.create(Interface.class);
         inter.getSubscriptionCardsByVendorID(customer_id, vendor_id, serverResponse);
+    }
+
+
+    void punchCard(String customerID, String barcode, String cardID,
+                   Callback<MessageResponse> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface inter = restAdapter.create(Interface.class);
+        inter.punchCardPOST(customerID, barcode, cardID, serverResponse);
     }
 }
