@@ -30,7 +30,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
     private String MEDIA_URL = "http://192.168.137.1:8000";
     public static final String PREFS = "prefs";
     public int buttonClicked = 0;
-    private SharedPreferences preferences;
+    SharedPreferences preferences;
     private int cardOneID;
     private int cardTwoID;
     private String customer_id;
@@ -46,7 +46,11 @@ public class SingleVendorSubscription extends AppCompatActivity {
     GridLayout gridLayoutTop;
     GridLayout gridLayoutBottom;
 
-
+    /**************************************************************************************
+     * This method will make a call to the server and get all the information of the
+     * specific subscription with the vendor, and will display all the details
+     * @param savedInstanceState - this saved instance
+     ***************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +75,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
             @Override
             protected Void doInBackground(String... strings) {
                 Communicator communicator = new Communicator();
+                //Makes server call - gets the CUrrent subscription details from Server
                 communicator.getSubscriptionCardsByVendorID(customer_id, vendor_id,
                         new Callback<List<SubscriptionSerializable>>() {
                             @Override
@@ -82,7 +87,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                 txtPhone.setText(subscriptionSerializables.get(0).getVendor().getPhone());
                                 txtLocation.setText(subscriptionSerializables.get(0).getVendor().getLocation());
 
-                                /**Displays all the information of the first Card that's in Use**/
+                                //Displays all the information of the first Card that's in Use
                                 if(subscriptionSerializables.get(0).getCardInUse().size() != 0){
                                     cardOneID = subscriptionSerializables.get(0).getCardInUse().get(0).getId();
                                     card1Header.setText(subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getDescription());
@@ -136,7 +141,10 @@ public class SingleVendorSubscription extends AppCompatActivity {
         }).execute();
     }
 
-
+    /**********************************************************************************
+     * Method that wil handle the onClick of the First(Top) card on the screen
+     * @param view - that was clicked
+     **********************************************************************************/
     public void cardOneClicked(View view){
         buttonClicked = 1;
         IntentIntegrator integrator = new IntentIntegrator(activity);
@@ -149,6 +157,10 @@ public class SingleVendorSubscription extends AppCompatActivity {
         integrator.initiateScan();
     }
 
+    /**********************************************************************************
+     * Method that wil handle the onClick of the Second (Bottom) card on the screen
+     * @param view - that was clicked
+     **********************************************************************************/
     public void cardTwoClicked(View view){
         buttonClicked = 2;
         IntentIntegrator integrator = new IntentIntegrator(activity);
@@ -219,8 +231,9 @@ public class SingleVendorSubscription extends AppCompatActivity {
                         return null;
                     }
                 }).execute(customer_id, result.getContents(), cardID);
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
             }
+            finish();
+            startActivity(getIntent());
         }
         else{
             super.onActivityResult(requestCode, resultCode, data);
