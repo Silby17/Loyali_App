@@ -67,7 +67,6 @@ public class SingleVendorSubscription extends AppCompatActivity {
                         new Callback<List<SubscriptionSerializable>>() {
                             @Override
                             public void success(List<SubscriptionSerializable> subscriptionSerializables, Response response) {
-                                System.out.println("Here");
                                 String imageURL = MEDIA_URL + subscriptionSerializables.get(0).getVendor().getLogoTitle();
                                 Picasso.with(getApplicationContext()).load(imageURL).into(logo);
                                 txtTitle.setText(subscriptionSerializables.get(0).getVendor().getStoreName());
@@ -118,7 +117,6 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                     }
                                 }
                             }
-
                             @Override
                             public void failure(RetrofitError error) {
                                 Toast.makeText(getApplicationContext(),
