@@ -16,6 +16,9 @@ public class TempMainMenu extends Activity {
     Button btnSplash;
     Button btnViewPager;
     Button btnInfoTesting;
+    Button btnClearData;
+    Button btnQR;
+    Button btnNEWQR;
     public static final String PREFS = "prefs";
     private SharedPreferences preferences;
 
@@ -26,13 +29,25 @@ public class TempMainMenu extends Activity {
         setContentView(R.layout.temp_menu);
 
         preferences = getSharedPreferences(PREFS, 0);
-        preferences.edit().putString("customer_id", "8").apply();
-
 
         btnSplash = (Button)findViewById(R.id.TMPSplashbtn);
         btnViewPager = (Button)findViewById(R.id.TMPViewPager);
         btnInfoTesting = (Button)findViewById(R.id.tmpINFOTesting);
+        btnClearData = (Button)findViewById(R.id.tmpClearData);
 
+        String customer = preferences.getString("customer_id", "");
+
+
+        btnClearData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyApplication.getInstance(). clearApplicationData();
+                preferences.edit().clear().commit();
+                String test = preferences.getString("customer_id", "");
+                System.out.println("Done");
+
+            }
+        });
 
         btnSplash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +69,9 @@ public class TempMainMenu extends Activity {
         btnInfoTesting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(TempMainMenu.this, TesterActivity.class);
-                TempMainMenu.this.startActivity(i);
+
             }
         });
+
     }
 }
