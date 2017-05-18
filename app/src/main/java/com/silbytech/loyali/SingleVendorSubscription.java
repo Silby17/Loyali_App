@@ -96,9 +96,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                         Picasso.with(getApplicationContext()).load(greyLogoURL).into(img);
                                         gridLayoutTop.addView(img, 200, 200);
                                     }
-
-
-                                    try {
+                                    if(subscriptionSerializables.get(0).getCardInUse().size() == 2){
                                         cardTwoID = subscriptionSerializables.get(0).getCardInUse().get(1).getId();
                                         card2Header.setText(subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getDescription());
                                         int card2Max = subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getMax();
@@ -117,10 +115,6 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                             Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
                                             gridLayoutBottom.addView(img2, 200, 200);
                                         }
-
-
-                                    } catch (NullPointerException e){
-                                        System.out.println("Null pointer Exception, No card second card");
                                     }
                                 }
                             }
@@ -138,6 +132,14 @@ public class SingleVendorSubscription extends AppCompatActivity {
 
     public void cardOneClicked(View view){
         Toast.makeText(getApplicationContext(),
-                "Card one Clicked", Toast.LENGTH_SHORT).show();
+                "Card one Clicked with ID: " + Integer.toString(cardOneID), Toast.LENGTH_SHORT).show();
+        //Send Card QR code to the server - Server side will check code and if correct
+        // increase the current card and send back a 200 Response
+    }
+
+
+    public void cardTwoClicked(View view){
+        Toast.makeText(getApplicationContext(),
+                "Card Two Clicked with ID: " + Integer.toString(cardTwoID), Toast.LENGTH_SHORT).show();
     }
 }
