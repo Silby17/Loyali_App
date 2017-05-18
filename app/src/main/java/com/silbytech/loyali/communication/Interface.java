@@ -4,7 +4,6 @@ import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
 import com.silbytech.loyali.responses.RegisterResponse;
-import com.silbytech.loyali.responses.ResultResponse;
 import java.util.List;
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -46,13 +45,6 @@ public interface Interface {
                        @Field("userID") String userID,
                        Callback<RegisterResponse> serverResponseCallback);
 
-    @FormUrlEncoded
-    @POST("/checkDetails")
-    void postCheckCreds(@Field("email") String email,
-                        @Field("password") String password,
-                        Callback<ResultResponse> serverResponse);
-
-
 
     @GET("/mobile/vendorsAndCards/") /*Working and tested (API)*/
     void getVendorsWithCards(Callback<List<VendorCardSerializer>> serverResponse);
@@ -81,4 +73,10 @@ public interface Interface {
                                         @Query("vendor_id") String vendor_id,
                                         Callback<List<SubscriptionSerializable>> serverResponse);
 
+    @FormUrlEncoded
+    @POST("/mobile/punchCard/")
+    void punchCardPOST(@Field("customer_id") String customerID,
+                       @Field("barcode") String barcode,
+                       @Field("card_id") String cardID,
+                       Callback<MessageResponse> serverResponse);
 }
