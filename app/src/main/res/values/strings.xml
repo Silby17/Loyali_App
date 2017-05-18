@@ -19,4 +19,10 @@
     <string name="qrDescription">The QR code can be found at the check-out. As a staff member for a punch and they\'ll get it for you.</string>
     <string name="user_not_exist">The User does not exist</string>
     <string name="invalidUser">Error: Invalid User</string>
+    <string name="subDeleted">Subscription deleted</string>
+    <string name="barcodeError">Invalid QR Code</string>
+    <string name="cardError">Card error</string>
+    <string name="punched">Card Punched!</string>
+    <string name="freeCoffee">Congratulation You get your free Coffee!</string>
+    <string name="freePastry">Congratulation You get your free Pastry!</string>
 </resources>
