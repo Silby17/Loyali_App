@@ -16,7 +16,7 @@ import java.util.List;
  ************************************/
 public class SubscriptionListAdapter extends BaseAdapter {
     private List<SubscriptionSerializable> subscriptionList;
-    private String MEDIA_URL = "http://192.168.1.13:8000";
+    private String MEDIA_URL = "http://192.168.137.1:8000";
     private Context context;
 
     public SubscriptionListAdapter(Context context, List<SubscriptionSerializable> subscriptionList) {
@@ -84,7 +84,7 @@ public class SubscriptionListAdapter extends BaseAdapter {
             card1.setText(card1Count);
             card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getDescription());
         }
-        v.setTag(subscriptionList.get(position).getVendor_user_id());
+        v.setTag(subscriptionList.get(position).getVendor().getId());
         return v;
     }
 }
