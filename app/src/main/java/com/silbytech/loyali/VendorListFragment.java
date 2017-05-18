@@ -1,5 +1,4 @@
 package com.silbytech.loyali;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
