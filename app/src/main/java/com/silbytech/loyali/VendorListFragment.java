@@ -1,10 +1,12 @@
 package com.silbytech.loyali;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
     private SharedPreferences preferences;
     private ListView lvVendors;
     String customer_id;
+    FragmentTransaction fragmentTransaction;
 
     public VendorListFragment() {}
 
@@ -63,6 +66,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
             @Override
             protected Void doInBackground(String... strings) {
                 final Communicator communicator = new Communicator();
+                //Server Call to get a list of all vendors and their Card details
                 communicator.getVendorsWithCards(new Callback<List<VendorCardSerializer>>() {
 
                     @Override
@@ -97,6 +101,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                                                     @Override
                                                     protected Void doInBackground(String... strings) {
                                                         Communicator com = new Communicator();
+                                                        //Create Subscription
                                                         com.postCreateSubscription(strings[0], strings[1],
                                                                 new Callback<MessageResponse>() {
                                                                     @Override
@@ -104,6 +109,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                                                                         Toast.makeText(getApplicationContext(),
                                                                                 messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                                                     }
+                                                                    //Failure creating subscription
                                                                     @Override
                                                                     public void failure(RetrofitError error) {
                                                                         String json =  new String(((TypedByteArray)error.getResponse().getBody()).getBytes());
@@ -115,7 +121,10 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                                                                 });
                                                         return null;
                                                     }
-                                                }).execute(vendor_id, customer_id);
+                                                }).execute(vendor_id, customer_id); //Create Subscription
+                                                Intent i = new Intent(getActivity(), MainMenuActivity.class);
+                                                startActivity(i);
+                                                getActivity().finish();
                                             }
                                         })
                                         .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -135,6 +144,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                             }
                         });
                     }
+                    //Failure getting list of Vendors from the Server
                     @Override
                     public void failure(RetrofitError error) {
                         if(error.getKind().name().equals("NETWORK")){
