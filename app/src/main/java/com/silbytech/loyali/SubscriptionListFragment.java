@@ -46,6 +46,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
+        //Retrieves the Customer_if from the preferences and stores it locally
         customer_id = preferences.getString("customer_id", "");
     }
 
@@ -58,6 +59,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
             @Override
             protected Void doInBackground(String... strings) {
                 Communicator communicator = new Communicator();
+                //Get all the subscriptions of the customer
                 communicator.getSubscriptions(customer_id,
                         new Callback<List<SubscriptionSerializable>>() {
                             @Override
@@ -77,7 +79,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                         startActivity(intent);
                                     }
                                 });
-
+                                //Long Item Click - Choose to remove subscription
                                 lvSubscriptions.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                                     @Override
                                     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -98,6 +100,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                                             @Override
                                                             protected Void doInBackground(String... params) {
                                                                 Communicator communicator = new Communicator();
+                                                                //Delete Subscription
                                                                 communicator.deleteSubscriptionPost(params[0],
                                                                         params[1],
                                                                         new Callback<MessageResponse>() {
@@ -117,7 +120,10 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                                                         });
                                                                 return null;
                                                             }
-                                                        }).execute(customer_id, vendor_ID);
+                                                        }).execute(customer_id, vendor_ID); //Delete Subscription
+                                                        Intent i = new Intent(getActivity(), MainMenuActivity.class);
+                                                        startActivity(i);
+                                                        getActivity().finish();
 
                                                     }
                                                 })
@@ -138,6 +144,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                     }
                                 });
                             }
+                            //Failure getting the Subscriptions from the Server
                             @Override
                             public void failure(RetrofitError error) {
                                 if(error.getKind().name().equals("NETWORK")){
