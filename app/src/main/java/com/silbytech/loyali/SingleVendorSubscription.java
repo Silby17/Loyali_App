@@ -141,6 +141,20 @@ public class SingleVendorSubscription extends AppCompatActivity {
         }).execute();
     }
 
+
+    /*************************************************************
+     * This method will override the onBackPressed so that after
+     * the user has punched his card all new updated info
+     * is loaded and seen in the app
+     *************************************************************/
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SingleVendorSubscription.this, MainMenuActivity.class);
+        this.startActivity(i);
+        this.finish();
+    }
+
+
     /**********************************************************************************
      * Method that wil handle the onClick of the First(Top) card on the screen
      * @param view - that was clicked
