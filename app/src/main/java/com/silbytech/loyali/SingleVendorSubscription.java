@@ -95,13 +95,13 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                     int card1Current = subscriptionSerializables.get(0).getCardInUse().get(0).getCurrent();
                                     ImageView img;
                                     int i;
-                                    for(i = 0; i <= card1Current; i++){
+                                    for(i = 0; i < card1Current; i++){
                                         img = new ImageView(getApplicationContext());
                                         String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
                                         Picasso.with(getApplicationContext()).load(redLogoURL).into(img);
                                         gridLayoutTop.addView(img, 200, 200);
                                     }
-                                    for(int j = i; j <= card1Max; j++){
+                                    for(int j = i; j < card1Max; j++){
                                         img = new ImageView(getApplicationContext());
                                         //img.setImageResource(R.drawable.logo_grey_compressed);
                                         String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
@@ -115,13 +115,13 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                         int card2Current = subscriptionSerializables.get(0).getCardInUse().get(1).getCurrent();
                                         ImageView img2;
                                         int m;
-                                        for(m = 0; m <= card2Current; m++){
+                                        for(m = 0; m < card2Current; m++){
                                             img2 = new ImageView(getApplicationContext());
                                             String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
                                             Picasso.with(getApplicationContext()).load(redLogoURL).into(img2);
                                             gridLayoutBottom.addView(img2, 200, 200);
                                         }
-                                        for(int j = i; j <= card2Max; j++){
+                                        for(int j = i; j < card2Max; j++){
                                             img2 = new ImageView(getApplicationContext());
                                             String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
                                             Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
