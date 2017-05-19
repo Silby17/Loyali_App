@@ -77,6 +77,7 @@ public class SubscriptionListFragment extends android.support.v4.app.Fragment {
                                         Intent intent = new Intent(getApplicationContext(), SingleVendorSubscription.class);
                                         intent.putExtra("vendor_id", vendor_id);
                                         startActivity(intent);
+                                        getActivity().finish();
                                     }
                                 });
                                 //Long Item Click - Choose to remove subscription
