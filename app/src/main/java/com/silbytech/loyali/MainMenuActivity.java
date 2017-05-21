@@ -33,6 +33,8 @@ public class MainMenuActivity extends AppCompatActivity {
         // Creates a new View Pager Adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+        adapter.addFragment(RewardsListFragment.newInstance(), "Rewards");
+
         // Adds Vendor List Page to ViewPager
         adapter.addFragment(VendorListFragment.newInstance(), "Stores");
 
@@ -42,7 +44,7 @@ public class MainMenuActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         //Sets the fragment at index 1 to be the opening fragment
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(1);
     }
 
     @Override
