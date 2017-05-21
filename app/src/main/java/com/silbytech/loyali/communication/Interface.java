@@ -34,7 +34,6 @@ public interface Interface {
                         @Field("push_api_key") String pushKey,
                         Callback<RegisterResponse> callback);
 
-
     @FormUrlEncoded
     @POST("/login/")
     void loginUser(@Field("username") String username,
@@ -89,5 +88,5 @@ public interface Interface {
 
     @GET("/mobile/rewards/")
     void getRewards(@Query("customer_id") String customerID,
-                    Callback<RewardsSerializable> serverResponse);
+                    Callback<List<RewardsSerializable>> serverResponse);
 }
