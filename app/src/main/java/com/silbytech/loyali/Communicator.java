@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 import com.silbytech.loyali.communication.Interface;
+import com.silbytech.loyali.entities.RewardsSerializable;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -128,5 +129,15 @@ public class Communicator {
                 .build();
         Interface inter = restAdapter.create(Interface.class);
         inter.punchCardPOST(customerID, barcode, cardID, serverResponse);
+    }
+
+
+    void getRewards(String customerID, Callback<RewardsSerializable> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface inter = restAdapter.create(Interface.class);
+        inter.getRewards(customerID, serverResponse);
     }
 }
