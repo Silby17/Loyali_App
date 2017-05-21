@@ -132,7 +132,7 @@ public class Communicator {
     }
 
 
-    void getRewards(String customerID, Callback<RewardsSerializable> serverResponse){
+    void getRewards(String customerID, Callback<List<RewardsSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
