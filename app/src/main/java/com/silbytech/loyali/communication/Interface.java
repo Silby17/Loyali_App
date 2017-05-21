@@ -1,5 +1,6 @@
 package com.silbytech.loyali.communication;
 
+import com.silbytech.loyali.entities.RewardsSerializable;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -33,11 +34,13 @@ public interface Interface {
                         @Field("push_api_key") String pushKey,
                         Callback<RegisterResponse> callback);
 
+
     @FormUrlEncoded
     @POST("/login/")
     void loginUser(@Field("username") String username,
                    @Field("password") String password,
                    Callback<RegisterResponse> serverResponse);
+
 
     @FormUrlEncoded
     @POST("/newFBUser")
@@ -55,11 +58,13 @@ public interface Interface {
                           Callback<List<SubscriptionSerializable>> serverResponse);
 
 
+
     @FormUrlEncoded
     @POST("/createSubscription/")
     void postCreateSubscription(@Field("vendor_id") String vendor_id,
                                 @Field("customer_id") String customer_id,
                                 Callback<MessageResponse> serverResponse);
+
 
     @FormUrlEncoded
     @POST("/deleteSubscription/")
@@ -73,10 +78,16 @@ public interface Interface {
                                         @Query("vendor_id") String vendor_id,
                                         Callback<List<SubscriptionSerializable>> serverResponse);
 
+
     @FormUrlEncoded
     @POST("/mobile/punchCard/")
     void punchCardPOST(@Field("customer_id") String customerID,
                        @Field("barcode") String barcode,
                        @Field("card_id") String cardID,
                        Callback<MessageResponse> serverResponse);
+
+
+    @GET("/mobile/rewards/")
+    void getRewards(@Query("customer_id") String customerID,
+                    Callback<RewardsSerializable> serverResponse);
 }
