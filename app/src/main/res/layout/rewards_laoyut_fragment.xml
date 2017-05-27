@@ -10,8 +10,10 @@
     <RelativeLayout
         android:id="@+id/fragDetails"
         android:layout_width="130dp"
-        android:layout_height="120dp"
-        android:layout_toRightOf="@+id/vendorLogoFrag">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/vendorLogoFrag"
+        android:layout_toEndOf="@+id/vendorLogoFrag">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,9 +23,6 @@
             android:text=""
             android:id="@+id/txtViewVendorName"
             android:layout_marginTop="10dp"/>
-
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,6 +34,7 @@
             android:layout_below="@+id/txtVendorType"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
@@ -43,32 +43,37 @@
             android:text=""
             android:textSize="12dp"
             android:layout_below="@+id/txtVendorPhone"/>
-
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="25dp"
             android:id="@+id/txtVendorType"
             android:textColor="@android:color/black"
-            android:text=""
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:layout_below="@+id/txtViewVendorName"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:text="(Click to use)"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtViewVendorLocation"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/fragDetails"
-        android:layout_width="130dp"
-        android:layout_height="120dp">
+        android:layout_width="wrap_content"
+        android:layout_height="125dp">
 
         <RelativeLayout
             android:id="@+id/reward1"
             android:layout_toLeftOf="@+id/reward2"
             android:background="#b80102"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_height="match_parent">
 
@@ -77,9 +82,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pastry"
                 android:textAlignment="center"
                 android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text=" None "
                 android:textColor="#ffffff"/>
 
             <TextView
@@ -89,27 +96,17 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:layout_centerInParent="true"
-                android:text="5"/>
+                android:text="-"/>
 
-            <TextView
-                android:id="@+id/reward1ClickToUse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="9sp"
-                android:layout_alignParentBottom="true"
-                android:text="(Click to use)"
-                android:paddingBottom="5dp" />
+
         </RelativeLayout>
-
 
 
         <RelativeLayout
             android:id="@+id/reward2"
             android:layout_alignParentRight="true"
             android:background="#EB6100"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <TextView
@@ -117,9 +114,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Coffee"
                 android:textAlignment="center"
                 android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text=" None "
                 android:textColor="#ffffff"/>
 
             <TextView
@@ -129,18 +128,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:layout_centerInParent="true"
-                android:text="3"/>
+                android:text="-"/>
 
-            <TextView
-                android:id="@+id/reward2ClickToUse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="9sp"
-                android:layout_alignParentBottom="true"
-                android:text="(Click to use)"
-                android:paddingBottom="5dp" />
+
 
 
         </RelativeLayout>
