@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import retrofit.client.Response;
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
-public class SubscriptionListFragment extends android.support.v4.app.Fragment {
+public class SubscriptionListFragment extends Fragment {
     private List<SubscriptionSerializable> subscriptionList;
     private SubscriptionListAdapter subscriptionAdapter;
     private ListView lvSubscriptions;
