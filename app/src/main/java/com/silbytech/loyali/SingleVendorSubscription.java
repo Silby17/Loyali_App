@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -69,13 +70,14 @@ public class SingleVendorSubscription extends AppCompatActivity {
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
         this.customer_id = preferences.getString("customer_id", "");
         this.vendor_id = getIntent().getStringExtra("vendor_id");
+        final RelativeLayout bottomCardLayout = (RelativeLayout)findViewById(R.id.card2TopBox);
 
 
         (new AsyncTask<String, Void, Void>(){
             @Override
             protected Void doInBackground(String... strings) {
                 Communicator communicator = new Communicator();
-                //Makes server call - gets the CUrrent subscription details from Server
+                //Makes server call - gets the Current subscription details from Server
                 communicator.getSubscriptionCardsByVendorID(customer_id, vendor_id,
                         new Callback<List<SubscriptionSerializable>>() {
                             @Override
@@ -99,14 +101,14 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                         img = new ImageView(getApplicationContext());
                                         String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
                                         Picasso.with(getApplicationContext()).load(redLogoURL).into(img);
-                                        gridLayoutTop.addView(img, 200, 200);
+                                        gridLayoutTop.addView(img, 150, 150);
                                     }
                                     for(int j = i; j < card1Max; j++){
                                         img = new ImageView(getApplicationContext());
                                         //img.setImageResource(R.drawable.logo_grey_compressed);
                                         String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
                                         Picasso.with(getApplicationContext()).load(greyLogoURL).into(img);
-                                        gridLayoutTop.addView(img, 200, 200);
+                                        gridLayoutTop.addView(img, 150, 150);
                                     }
                                     if(subscriptionSerializables.get(0).getCardInUse().size() == 2){
                                         cardTwoID = subscriptionSerializables.get(0).getCardInUse().get(1).getId();
@@ -119,14 +121,17 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                             img2 = new ImageView(getApplicationContext());
                                             String redLogoURL = MEDIA_URL + "/media/loyali_logo.png";
                                             Picasso.with(getApplicationContext()).load(redLogoURL).into(img2);
-                                            gridLayoutBottom.addView(img2, 200, 200);
+                                            gridLayoutBottom.addView(img2, 150, 150);
                                         }
                                         for(int j = i; j < card2Max; j++){
                                             img2 = new ImageView(getApplicationContext());
                                             String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
                                             Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
-                                            gridLayoutBottom.addView(img2, 200, 200);
+                                            gridLayoutBottom.addView(img2, 150, 150);
                                         }
+                                    }
+                                    else{
+                                        bottomCardLayout.setVisibility(View.INVISIBLE);
                                     }
                                 }
                             }
