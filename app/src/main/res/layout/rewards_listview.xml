@@ -15,4 +15,13 @@
         android:divider="#d1d1d1">
     </ListView>
 
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/empty"
+        android:text="@string/currently_no_rewards"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"/>
+
 </LinearLayout>
