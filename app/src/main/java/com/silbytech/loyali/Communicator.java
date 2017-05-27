@@ -1,6 +1,6 @@
 package com.silbytech.loyali;
 import com.silbytech.loyali.communication.Interface;
-import com.silbytech.loyali.entities.RewardsSerializable;
+import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -132,12 +132,23 @@ public class Communicator {
     }
 
 
-    void getRewards(String customerID, Callback<List<RewardsSerializable>> serverResponse){
+    void getRewards(String customerID, Callback<List<CustomerRewardsListSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Interface inter = restAdapter.create(Interface.class);
         inter.getRewards(customerID, serverResponse);
+    }
+
+
+    void getRewardsByVendor(String customerID, String vendorID,
+                            Callback<List<CustomerRewardsListSerializable>> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface inter = restAdapter.create(Interface.class);
+        inter.getRewardsByVendor(customerID, vendorID, serverResponse);
     }
 }
