@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.silbytech.loyali.R;
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 /************************************
@@ -43,14 +42,17 @@ public class RewardsAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = View.inflate(context, R.layout.rewards_laoyut_fragment, null);
+        //Vendor information Views
         TextView storeName = (TextView)v.findViewById(R.id.txtViewVendorName);
         TextView location = (TextView)v.findViewById(R.id.txtViewVendorLocation);
         TextView phone = (TextView)v.findViewById(R.id.txtVendorPhone);
         TextView type = (TextView)v.findViewById(R.id.txtVendorType);
 
+        //First Reward info views
         TextView reward1Title = (TextView)v.findViewById(R.id.reward1Title);
         TextView reward2Title = (TextView)v.findViewById(R.id.reward2Title);
 
+        //Second Reward info Views
         TextView reward1Amount = (TextView)v.findViewById(R.id.reward1Amount);
         TextView reward2Amount = (TextView)v.findViewById(R.id.reward2Amount);
 
@@ -65,15 +67,20 @@ public class RewardsAdapter extends BaseAdapter {
         phone.setText(rewardsList.get(i).getPhone());
         type.setText(rewardsList.get(i).getStoreType());
 
+        //Checks to see if there is at least one reward in the List to extract
         if(rewardsList.get(i).getRewardsList().size() != 0){
             reward1Title.setText(rewardsList.get(i).getRewardsList().get(0).getType());
             reward1Amount.setText(Integer.toString(rewardsList.get(i).getRewardsList().get(0).getAmount()));
         }
+
+        //Checks to see if there is a second Reward in the list to extract
         if(rewardsList.get(i).getRewardsList().size() == 2){
             reward2Title.setText(rewardsList.get(i).getRewardsList().get(1).getType());
             reward2Amount.setText(Integer.toString(rewardsList.get(i).getRewardsList().get(1).getAmount()));
         }
-        v.getTag(rewardsList.get(i).getId());
+
+        //Assigns the VENDOR ID as the Id of this fragment
+        v.setTag(rewardsList.get(i).getId());
         return v;
     }
 }
