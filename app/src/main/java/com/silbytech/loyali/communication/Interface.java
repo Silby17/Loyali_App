@@ -1,6 +1,6 @@
 package com.silbytech.loyali.communication;
 
-import com.silbytech.loyali.entities.RewardsSerializable;
+import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -88,5 +88,11 @@ public interface Interface {
 
     @GET("/mobile/rewards/")
     void getRewards(@Query("customer_id") String customerID,
-                    Callback<List<RewardsSerializable>> serverResponse);
+                    Callback<List<CustomerRewardsListSerializable>> serverResponse);
+
+
+    @GET("/mobile/rewards/")
+    void getRewardsByVendor(@Query("customer_id") String customerID,
+                            @Query("vendor_id") String vendorID,
+                            Callback<List<CustomerRewardsListSerializable>> serverResponse);
 }
