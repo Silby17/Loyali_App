@@ -104,6 +104,7 @@
             android:layout_weight="1">
 
             <RelativeLayout
+                android:onClick="reward1OnClick"
                 android:id="@+id/card1TopBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,7 +117,7 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:paddingTop="4dp"
-                    android:text="Coming Soon..."
+                    android:text="None"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="20dp" />
@@ -127,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/reward1Title"
                     android:layout_centerInParent="true"
-                    android:text="4"
+                    android:text="-"
                     android:textColor="#ffffff"
                     android:textSize="35sp" />
 
@@ -159,6 +160,7 @@
             android:background="#e7e8ea">
 
             <RelativeLayout
+                android:onClick="reward2OnClick"
                 android:id="@+id/card2TopBox"
                 android:background="#EB6100"
                 android:layout_width="match_parent"
@@ -170,7 +172,7 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:paddingTop="4dp"
-                    android:text="Coming Soon..."
+                    android:text="None"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="20dp" />
@@ -181,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/reward2Title"
                     android:layout_centerInParent="true"
-                    android:text="4"
+                    android:text="-"
                     android:textColor="#ffffff"
                     android:textSize="35sp" />
 
