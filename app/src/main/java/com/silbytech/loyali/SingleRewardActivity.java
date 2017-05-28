@@ -1,5 +1,7 @@
 package com.silbytech.loyali;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
+import com.silbytech.loyali.responses.MessageResponse;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 import retrofit.Callback;
@@ -24,7 +26,7 @@ public class SingleRewardActivity extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
     private String MEDIA_URL = "http://192.168.137.1:8000";
     public static final String PREFS = "prefs";
-    public int buttonClicked = 0;
+    public int rewardsCount = 0;
     SharedPreferences preferences;
     private int reward1ID;
     private int reward2ID;
@@ -39,6 +41,9 @@ public class SingleRewardActivity extends AppCompatActivity {
     TextView reward2Title;
     TextView reward1Amount;
     TextView reward2Amount;
+    String reward1Type;
+    String reward2Type;
+    String vendorLogo;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class SingleRewardActivity extends AppCompatActivity {
                                 txtType.setText(customerRewardsListSerializables.get(0).getStoreType());
                                 txtPhone.setText(customerRewardsListSerializables.get(0).getPhone());
                                 txtLocation.setText(customerRewardsListSerializables.get(0).getLocation());
+                                vendorLogo = customerRewardsListSerializables.get(0).getLogoTitle();
 
                                 if(customerRewardsListSerializables.get(0).getRewardsList() != null){
                                     reward1ID = customerRewardsListSerializables.get(0).getRewardsList().get(0).getId();
@@ -81,6 +87,8 @@ public class SingleRewardActivity extends AppCompatActivity {
                                             .getRewardsList().get(0).getType());
                                     reward1Amount.setText(Integer.toString(customerRewardsListSerializables.get(0)
                                             .getRewardsList().get(0).getAmount()));
+                                    reward1Type = customerRewardsListSerializables.get(0).getRewardsList().get(0).getType();
+                                    rewardsCount = 1;
                                 }
                                 if(customerRewardsListSerializables.get(0).getRewardsList().size() == 2){
                                     reward2ID = customerRewardsListSerializables.get(0).getRewardsList().get(1).getId();
@@ -88,6 +96,8 @@ public class SingleRewardActivity extends AppCompatActivity {
                                             .getRewardsList().get(1).getType());
                                     reward2Amount.setText(Integer.toString(customerRewardsListSerializables.get(0)
                                             .getRewardsList().get(1).getAmount()));
+                                    reward2Type = customerRewardsListSerializables.get(0).getRewardsList().get(1).getType();
+                                    rewardsCount = 2;
                                 }
                             }
 
@@ -102,6 +112,7 @@ public class SingleRewardActivity extends AppCompatActivity {
             }
         }).execute(customer_id, vendor_id);
     }
+
 
     /*************************************************************
      * This method will override the onBackPressed so that after
@@ -121,18 +132,112 @@ public class SingleRewardActivity extends AppCompatActivity {
      * @param view - that was clicked
      **********************************************************************************/
     public void reward1OnClick(View view){
-        buttonClicked = 1;
-        Toast.makeText(getApplicationContext(), "First Reward clicked ID: = " + reward1ID, Toast.LENGTH_SHORT).show();
-
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SingleRewardActivity.this);
+        alertDialogBuilder.setTitle(R.string.redeemTitle);
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(R.string.redeemConfimation)
+                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                (new AsyncTask<String, Void, Void>(){
+                    @Override
+                    protected Void doInBackground(String... strings) {
+                        Communicator communicator = new Communicator();
+                        communicator.redeemRewardPOST(strings[0],
+                                new Callback<MessageResponse>() {
+                                    @Override
+                                    public void success(MessageResponse messageResponse, Response response) {
+                                        if(response.getStatus() == 200){
+                                            Intent i = new Intent(SingleRewardActivity.this, RedeemConfirmationActivity.class);
+                                            i.putExtra("rewardType", reward1Type);
+                                            i.putExtra("vendorLogo", vendorLogo);
+                                            SingleRewardActivity.this.startActivity(i);
+                                            SingleRewardActivity.this.finish();
+                                        }
+                                    }
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getApplicationContext(),
+                                                R.string.connectionError, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        return null;
+                    }
+                }).execute(Integer.toString(reward1ID));
+            }
+        }).setNegativeButton("No",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int id) {
+                // if this button is clicked, just close
+                // the dialog box and do nothing
+                dialog.cancel();
+            }
+        });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
     }
+
 
     /**********************************************************************************
      * Method that wil handle the onClick of the Second (Right) reward on the screen
      * @param view - that was clicked
      **********************************************************************************/
     public void reward2OnClick(View view){
-        buttonClicked = 2;
-        Toast.makeText(getApplicationContext(), "Second Reward clicked id: = " + reward2ID, Toast.LENGTH_SHORT).show();
+        if(rewardsCount == 2){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SingleRewardActivity.this);
+            alertDialogBuilder.setTitle(R.string.redeemTitle);
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage(R.string.redeemConfimation)
+                    .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    (new AsyncTask<String, Void, Void>(){
+                        @Override
+                        protected Void doInBackground(String... strings) {
+                            Communicator communicator = new Communicator();
+                            communicator.redeemRewardPOST(strings[0],
+                                    new Callback<MessageResponse>() {
+                                        @Override
+                                        public void success(MessageResponse messageResponse, Response response) {
+                                            if(response.getStatus() == 200){
+                                                Intent i = new Intent(SingleRewardActivity.this, RedeemConfirmationActivity.class);
+                                                i.putExtra("rewardType", reward2Type);
+                                                i.putExtra("vendorLogo", vendorLogo);
+                                                SingleRewardActivity.this.startActivity(i);
+                                                SingleRewardActivity.this.finish();
+                                            }
+                                        }
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.connectionError, Toast.LENGTH_SHORT).show();
 
+                                        }
+                                    });
+                            return null;
+                        }
+                    }).execute(Integer.toString(reward2ID));
+
+                }
+            }).setNegativeButton("No",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    // if this button is clicked, just close
+                    // the dialog box and do nothing
+                    dialog.cancel();
+                }
+            });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            // show it
+            alertDialog.show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),
+                    R.string.noReward, Toast.LENGTH_SHORT).show();
+        }
     }
 }
