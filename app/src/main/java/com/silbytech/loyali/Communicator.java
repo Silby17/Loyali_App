@@ -151,4 +151,14 @@ public class Communicator {
         Interface inter = restAdapter.create(Interface.class);
         inter.getRewardsByVendor(customerID, vendorID, serverResponse);
     }
+
+
+    void redeemRewardPOST(String rewardID, Callback<MessageResponse> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface inter = restAdapter.create(Interface.class);
+        inter.redeemRewardPOST(rewardID, serverResponse);
+    }
 }

@@ -95,4 +95,9 @@ public interface Interface {
     void getRewardsByVendor(@Query("customer_id") String customerID,
                             @Query("vendor_id") String vendorID,
                             Callback<List<CustomerRewardsListSerializable>> serverResponse);
+
+
+    @FormUrlEncoded
+    @POST("/mobile/redeemReward/")
+    void redeemRewardPOST(@Field("reward_id") String rewardID, Callback<MessageResponse> serverResponse);
 }
