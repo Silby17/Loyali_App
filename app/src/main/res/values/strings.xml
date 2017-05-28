@@ -25,4 +25,7 @@
     <string name="punched">Card Punched!</string>
     <string name="freeCoffee">Congratulation You get your free Coffee!</string>
     <string name="freePastry">Congratulation You get your free Pastry!</string>
+    <string name="currently_no_rewards">You have no rewards</string>
+    <string name="redeemConfimation">Are you sure you want to Redeem this now?</string>
+    <string name="redeemTitle">Redeem Reward</string>
 </resources>
