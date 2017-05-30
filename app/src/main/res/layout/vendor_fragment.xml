@@ -94,7 +94,7 @@
         <TextView
             android:paddingTop="5dp"
             android:textColor="#ffffff"
-            android:background="#b80102"
+            android:background="@drawable/rounded_corner_red"
             android:text="@string/coming_soon"
             android:textAlignment="center"
             android:id="@+id/txtCard1Header"
@@ -110,7 +110,7 @@
             android:textColor="#ffffff"
             android:textAlignment="center"
             android:text="@string/coming_soon"
-            android:background="#b80102"
+            android:background="@drawable/rounded_corner_red"
             android:id="@+id/txtCard2"
             android:layout_width="150dp"
             android:layout_height="30dp"
