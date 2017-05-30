@@ -65,11 +65,15 @@ public class LoginActivity extends Activity {
 
                                 @Override
                                 public void failure(RetrofitError error) {
-                                    if(error.getResponse().getStatus() == 409){
+                                    if(error.getKind().name().equals("NETWORK")){
+                                        Toast.makeText(getApplicationContext(),
+                                                R.string.networkError, Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(error.getResponse().getStatus() == 409){
                                         Toast.makeText(getApplicationContext(),
                                                 R.string.user_not_exist, Toast.LENGTH_SHORT).show();
                                     }
-                                }
+                                    }
                             });
                             return null;
                         }
