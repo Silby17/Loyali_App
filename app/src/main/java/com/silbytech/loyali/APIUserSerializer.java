@@ -15,9 +15,18 @@ public class APIUserSerializer implements Serializable {
     @SerializedName("id")
     private int customer_id;
 
-    public APIUserSerializer(String username, int customer_id) {
+    @SerializedName("first_name")
+    private String firstName;
+
+    @SerializedName("last_name")
+    private String lastName;
+
+
+    public APIUserSerializer(String username, int customer_id, String firstName, String lastName) {
         this.username = username;
         this.customer_id = customer_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -34,5 +43,21 @@ public class APIUserSerializer implements Serializable {
 
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
