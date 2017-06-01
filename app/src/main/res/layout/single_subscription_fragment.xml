@@ -93,15 +93,16 @@
 
 
         <RelativeLayout
+            android:background="@drawable/shadow_round"
             android:id="@+id/card1Frag"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:background="#b80102"
             android:layout_width="150dp"
             android:layout_height="100dp">
 
 
             <TextView
+                android:background="@drawable/rounded_corner_red"
                 android:paddingTop="5dp"
                 android:textColor="#ffffff"
                 android:text="@string/coming_soon"
@@ -115,7 +116,7 @@
 
             <TextView
                 android:id="@+id/txtCard1Count"
-                android:textColor="#ffffff"
+                android:textColor="@android:color/black"
                 android:textSize="35dp"
                 android:textAlignment="center"
                 android:text="-"
@@ -129,7 +130,7 @@
 
 
         <RelativeLayout
-            android:background="#b80102"
+            android:background="@drawable/shadow_round"
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_alignTop="@+id/card1Frag"
@@ -139,7 +140,7 @@
             android:layout_marginEnd="12dp">
 
             <TextView
-
+                android:background="@drawable/rounded_corner_red"
                 android:paddingTop="5dp"
                 android:textColor="#ffffff"
                 android:textSize="15dp"
@@ -155,7 +156,7 @@
             <TextView
                 android:layout_marginTop="5dp"
                 android:id="@+id/txtCard2Count"
-                android:textColor="#ffffff"
+                android:textColor="@android:color/black"
                 android:textSize="35dp"
                 android:textAlignment="center"
                 android:text="-"

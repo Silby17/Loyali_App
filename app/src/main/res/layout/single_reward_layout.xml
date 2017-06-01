@@ -104,14 +104,15 @@
             android:layout_weight="1">
 
             <RelativeLayout
+                android:background="@drawable/shadow_round"
                 android:onClick="reward1OnClick"
                 android:id="@+id/card1TopBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:background="#b80102">
+                android:layout_marginLeft="5dp">
 
                 <TextView
+                    android:background="@drawable/rounded_corner_red"
                     android:id="@+id/reward1Title"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -129,7 +130,7 @@
                     android:layout_below="@+id/reward1Title"
                     android:layout_centerInParent="true"
                     android:text="-"
-                    android:textColor="#ffffff"
+                    android:textColor="@android:color/black"
                     android:textSize="35sp" />
 
                 <TextView
@@ -138,7 +139,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:text="(Click to Use)"
-                    android:textColor="#ffffff"
+                    android:textColor="@android:color/black"
                     android:paddingBottom="3dp"
                     android:textSize="15sp" />
 
@@ -160,13 +161,14 @@
             android:background="#e7e8ea">
 
             <RelativeLayout
+                android:background="@drawable/shadow_round"
                 android:onClick="reward2OnClick"
                 android:id="@+id/card2TopBox"
-                android:background="#EB6100"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:background="@drawable/rounded_corner_red"
                     android:id="@+id/reward2Title"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -184,7 +186,7 @@
                     android:layout_below="@+id/reward2Title"
                     android:layout_centerInParent="true"
                     android:text="-"
-                    android:textColor="#ffffff"
+                    android:textColor="@android:color/black"
                     android:textSize="35sp" />
 
                 <TextView
@@ -193,7 +195,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:text="(Click to Use)"
-                    android:textColor="#ffffff"
+                    android:textColor="@android:color/black"
                     android:paddingBottom="3dp"
                     android:textSize="15sp" />
             </RelativeLayout>
