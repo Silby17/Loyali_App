@@ -1,12 +1,18 @@
 package com.silbytech.loyali;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -30,6 +36,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
     private String MEDIA_URL = "http://192.168.137.1:8000";
     public static final String PREFS = "prefs";
+    Context context = this;
     public int buttonClicked = 0;
     SharedPreferences preferences;
     private int cardOneID;
@@ -56,6 +63,12 @@ public class SingleVendorSubscription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vendor_subscription_fragment);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         logo = (ImageView)findViewById(R.id.imgVendorLogo);
         txtTitle = (TextView)findViewById(R.id.txtVendorTitle);
         txtType = (TextView)findViewById(R.id.txtVendorType);
@@ -65,8 +78,6 @@ public class SingleVendorSubscription extends AppCompatActivity {
         card2Header = (TextView)findViewById(R.id.card2Header);
         gridLayoutTop = (GridLayout)findViewById(R.id.gridLayoutTop);
         gridLayoutBottom = (GridLayout)findViewById(R.id.gridLayoutBottom);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
         this.customer_id = preferences.getString("customer_id", "");
         this.vendor_id = getIntent().getStringExtra("vendor_id");
@@ -258,5 +269,59 @@ public class SingleVendorSubscription extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
         buttonClicked = 0;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent i = new Intent(SingleVendorSubscription.this, MainMenuActivity.class);
+            SingleVendorSubscription.this.startActivity(i);
+            finish();
+        }
+        switch(item.getItemId()){
+            case R.id.itemProfile:
+                Intent i = new Intent(SingleVendorSubscription.this, UserProfileActivity.class);
+                SingleVendorSubscription.this.startActivity(i);
+                return true;
+            case R.id.itemLogout:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle("Logout");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Are you sure you want to Logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                MyApplication.getInstance().clearApplicationData();
+                                SharedPreferences prefs = getSharedPreferences(PREFS, 0);
+                                prefs.edit().clear().apply();
+                                startActivity(new Intent(SingleVendorSubscription.this, LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+                // Create Alert Dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // Show the Dialog Box
+                alertDialog.show();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
