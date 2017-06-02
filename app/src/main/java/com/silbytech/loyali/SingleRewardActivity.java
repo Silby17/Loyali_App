@@ -1,12 +1,17 @@
 package com.silbytech.loyali;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,11 +49,20 @@ public class SingleRewardActivity extends AppCompatActivity {
     String reward1Type;
     String reward2Type;
     String vendorLogo;
+    Context context = this;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_reward_layout);
+
+        //Adds the Toolbar to the top of the Layout
+        Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         logo = (ImageView)findViewById(R.id.imgVendorLogo);
         txtTitle = (TextView)findViewById(R.id.txtVendorTitle);
@@ -238,6 +252,59 @@ public class SingleRewardActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),
                     R.string.noReward, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent i = new Intent(SingleRewardActivity.this, MainMenuActivity.class);
+            SingleRewardActivity.this.startActivity(i);
+            finish();
+        }
+        switch(item.getItemId()){
+            case R.id.itemProfile:
+                Intent i = new Intent(SingleRewardActivity.this, UserProfileActivity.class);
+                SingleRewardActivity.this.startActivity(i);
+                return true;
+            case R.id.itemLogout:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle("Logout");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Are you sure you want to Logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                MyApplication.getInstance().clearApplicationData();
+                                SharedPreferences prefs = getSharedPreferences(PREFS, 0);
+                                prefs.edit().clear().apply();
+                                startActivity(new Intent(SingleRewardActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+                // Create Alert Dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // Show the Dialog Box
+                alertDialog.show();
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
