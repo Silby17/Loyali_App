@@ -69,6 +69,8 @@ public class TempMainMenu extends Activity {
         btnInfoTesting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(TempMainMenu.this, RedeemConfirmationActivity.class);
+                TempMainMenu.this.startActivity(i);
 
             }
         });
