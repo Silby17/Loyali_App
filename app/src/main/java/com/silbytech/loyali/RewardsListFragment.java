@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.silbytech.loyali.adapters.RewardsAdapter;
+import com.silbytech.loyali.adapters.RewardsAdapterNew;
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import java.util.List;
 import retrofit.Callback;
@@ -27,7 +27,7 @@ public class RewardsListFragment extends Fragment {
     private List<CustomerRewardsListSerializable> rewardsList;
     public static final String PREFS = "prefs";
     private SharedPreferences preferences;
-    private RewardsAdapter rewardsAdapter;
+    private RewardsAdapterNew rewardsAdapterNew;
     private ListView rewardsListView;
     private String customerID;
 
@@ -63,8 +63,8 @@ public class RewardsListFragment extends Fragment {
                             public void success(List<CustomerRewardsListSerializable> rewardsSerializables, Response response) {
                                 rewardsListView = (ListView)getActivity().findViewById(R.id.lstViewRewards);
                                 rewardsList = rewardsSerializables;
-                                rewardsAdapter = new RewardsAdapter(rewardsList, getApplicationContext());
-                                rewardsListView.setAdapter(rewardsAdapter);
+                                rewardsAdapterNew = new RewardsAdapterNew(rewardsList, getApplicationContext());
+                                rewardsListView.setAdapter(rewardsAdapterNew);
 
                                rewardsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                    @Override
