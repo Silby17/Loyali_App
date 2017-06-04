@@ -55,6 +55,8 @@ public class LoginActivity extends Activity {
                                     preferences = getSharedPreferences(PREFS, 0);
                                     preferences.edit().putBoolean("isFacebookUser", false).apply();
                                     //Adds the email, customer ID and login boolean to Prefs
+                                    preferences.edit().putInt("userid", resultResponse.getApiUser().getCustomer_id()).apply();
+                                    SplashActivity.pubnubController.RegisterUserChannel();
                                     preferences.edit().putString("username", username).apply();
                                     preferences.edit().putString("pass", password).apply();
                                     preferences.edit().putString("customer_id", Integer.toString(resultResponse.getApiUser().getCustomer_id())).apply();
