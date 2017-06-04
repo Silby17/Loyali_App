@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 
+import com.silbytech.loyali.controllers.PubnubController;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -17,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     public static final String PREFS = "prefs";
     private SharedPreferences preferences;
 
+    public static PubnubController pubnubController = new PubnubController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +52,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, 2000);
+        pubnubController.Start(getApplicationContext());
     }
 }
