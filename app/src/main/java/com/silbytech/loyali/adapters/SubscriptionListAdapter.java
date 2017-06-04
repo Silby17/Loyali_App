@@ -69,20 +69,20 @@ public class SubscriptionListAdapter extends BaseAdapter {
             String card1Current = Integer.toString(subscriptionList.get(position).getCardInUse().get(0).getCurrent());
             String card1Count =  card1Current + "/" + card1Max;
             card1.setText(card1Count);
-            card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getDescription());
+            card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getType());
 
             String card2Max = Integer.toString(subscriptionList.get(position).getCardInUse().get(1).getCard().getMax());
             String card2Current = Integer.toString(subscriptionList.get(position).getCardInUse().get(1).getCurrent());
             String card2Count =  card2Current + "/" + card2Max;
             card2.setText(card2Count);
-            card2Header.setText(subscriptionList.get(position).getCardInUse().get(1).getCard().getDescription());
+            card2Header.setText(subscriptionList.get(position).getCardInUse().get(1).getCard().getType());
 
         } else if(subscriptionList.get(position).getCardInUse().size() == 1){
             String card1Max = Integer.toString(subscriptionList.get(position).getCardInUse().get(0).getCard().getMax());
             String card1Current = Integer.toString(subscriptionList.get(position).getCardInUse().get(0).getCurrent());
             String card1Count =  card1Current + "/" + card1Max;
             card1.setText(card1Count);
-            card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getDescription());
+            card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getType());
         }
         v.setTag(subscriptionList.get(position).getVendor().getId());
         return v;
