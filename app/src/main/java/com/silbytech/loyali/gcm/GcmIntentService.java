@@ -12,13 +12,10 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.silbytech.loyali.MainMenuActivity;
 import com.silbytech.loyali.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class GcmIntentService extends IntentService {
 
