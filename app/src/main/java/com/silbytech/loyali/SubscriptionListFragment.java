@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 import com.silbytech.loyali.adapters.SubscriptionListAdapter;
+import com.silbytech.loyali.adapters.SubscriptionListAdapterNew;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.responses.MessageResponse;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -27,7 +28,7 @@ import retrofit.client.Response;
  ************************************/
 public class SubscriptionListFragment extends Fragment {
     private List<SubscriptionSerializable> subscriptionList;
-    private SubscriptionListAdapter subscriptionAdapter;
+    private SubscriptionListAdapterNew subscriptionAdapter;
     private ListView lvSubscriptions;
     public static final String PREFS = "prefs";
     private SharedPreferences preferences;
@@ -68,7 +69,7 @@ public class SubscriptionListFragment extends Fragment {
                                 System.out.println("Here");
                                 lvSubscriptions = (ListView)getActivity().findViewById(R.id.lstViewSubscriptions);
                                 subscriptionList = subscriptionSerializables;
-                                subscriptionAdapter = new SubscriptionListAdapter(getApplicationContext(), subscriptionList);
+                                subscriptionAdapter = new SubscriptionListAdapterNew(getApplicationContext(), subscriptionList);
                                 lvSubscriptions.setAdapter(subscriptionAdapter);
 
                                 lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {

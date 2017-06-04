@@ -103,7 +103,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                 //Displays all the information of the first Card that's in Use
                                 if(subscriptionSerializables.get(0).getCardInUse().size() != 0){
                                     cardOneID = subscriptionSerializables.get(0).getCardInUse().get(0).getId();
-                                    card1Header.setText(subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getDescription());
+                                    card1Header.setText(subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getType());
                                     int card1Max = subscriptionSerializables.get(0).getCardInUse().get(0).getCard().getMax();
                                     int card1Current = subscriptionSerializables.get(0).getCardInUse().get(0).getCurrent();
                                     ImageView img;
@@ -123,7 +123,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                     }
                                     if(subscriptionSerializables.get(0).getCardInUse().size() == 2){
                                         cardTwoID = subscriptionSerializables.get(0).getCardInUse().get(1).getId();
-                                        card2Header.setText(subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getDescription());
+                                        card2Header.setText(subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getType());
                                         int card2Max = subscriptionSerializables.get(0).getCardInUse().get(1).getCard().getMax();
                                         int card2Current = subscriptionSerializables.get(0).getCardInUse().get(1).getCurrent();
                                         ImageView img2;
