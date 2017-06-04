@@ -4,9 +4,13 @@
     package="com.silbytech.loyali">
 
     <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="barcode"/>
+    <permission android:name="com.silbytech.loyali.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="silbydevelopment.trialia.permission.C2D_MESSAGE" />
 
     <application
         android:name="com.silbytech.loyali.MyApplication"
@@ -88,7 +92,23 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+
+        <!-- The PubNub calls -->
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="silbydevelopment.trialia" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".gcm.GcmIntentService" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
     <provider android:authorities="com.facebook.app.FacebookContentProvider176498166198138"
