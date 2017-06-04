@@ -78,7 +78,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:background="@drawable/rounded_corner_red"
+                android:background="@drawable/top_rounded_corners_red"
                 android:id="@+id/reward1Title"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
@@ -99,8 +99,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="-"/>
-
-
         </RelativeLayout>
 
 
@@ -114,7 +112,7 @@
             android:layout_alignParentEnd="true">
 
             <TextView
-                android:background="@drawable/rounded_corner_red"
+                android:background="@drawable/top_rounded_corners_red"
                 android:id="@+id/reward2Title"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
