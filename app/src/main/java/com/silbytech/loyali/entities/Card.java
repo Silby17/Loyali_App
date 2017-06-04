@@ -18,12 +18,16 @@ public class Card implements Serializable {
     @SerializedName("description")
     private String description;
 
-    public Card(int id, int max, String description) {
+    @SerializedName("type")
+    private String type;
+
+
+    public Card(int id, int max, String description, String type) {
         this.id = id;
         this.max = max;
         this.description = description;
+        this.type = type;
     }
-
 
     public int getId() {
         return id;
@@ -47,5 +51,13 @@ public class Card implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
