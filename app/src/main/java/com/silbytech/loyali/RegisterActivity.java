@@ -1,19 +1,15 @@
 package com.silbytech.loyali;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -41,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         registerButton = (LoginButton)findViewById(R.id.fb_register_btn);
         registerButton.setReadPermissions("public_profile");
-
 
         profileTracker = new ProfileTracker() {
             @Override
@@ -129,10 +123,13 @@ public class RegisterActivity extends AppCompatActivity {
                                                 preferences = getSharedPreferences(PREFS, 0);
                                                 preferences.edit().putBoolean("isFacebookUser", false).apply();
                                                 //Adds the email, customer ID and login boolean to Prefs
+                                                preferences.edit().putInt("userid", registerResponse.getApiUser().getCustomer_id()).apply();
+                                                SplashActivity.pubnubController.RegisterUserChannel();
                                                 preferences.edit().putString("username", email).apply();
                                                 preferences.edit().putString("pass", password).apply();
                                                 preferences.edit().putString("customer_id", Integer.toString(registerResponse.getApiUser().getCustomer_id())).apply();
                                                 preferences.edit().putBoolean("logged-in", true).apply();
+
                                                 Intent i = new Intent(RegisterActivity.this, MainMenuActivity.class);
                                                 RegisterActivity.this.startActivity(i);
                                                 finish();
