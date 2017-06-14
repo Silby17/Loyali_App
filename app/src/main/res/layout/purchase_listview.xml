@@ -3,7 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
     <Button
+        android:background="#ff4500"
+        android:layout_marginTop="5dp"
         android:id="@+id/btnFilterByVendors"
         android:text="Filter by Vendors"
         android:layout_width="match_parent"
