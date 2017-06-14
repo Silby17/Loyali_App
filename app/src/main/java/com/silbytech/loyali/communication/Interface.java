@@ -1,6 +1,9 @@
 package com.silbytech.loyali.communication;
 
+import android.telecom.Call;
+
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
+import com.silbytech.loyali.entities.PurchaseSerializer;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -99,5 +102,11 @@ public interface Interface {
 
     @FormUrlEncoded
     @POST("/mobile/redeemReward/")
-    void redeemRewardPOST(@Field("reward_id") String rewardID, Callback<MessageResponse> serverResponse);
+    void redeemRewardPOST(@Field("reward_id") String rewardID,
+                          Callback<MessageResponse> serverResponse);
+
+
+    @GET("/customer/allPurchases/")
+    void getPurchases(@Query("customer_id") String customerID,
+                      Callback<List<PurchaseSerializer>> serverResponse);
 }
