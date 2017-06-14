@@ -1,6 +1,9 @@
 package com.silbytech.loyali;
+import android.telecom.Call;
+
 import com.silbytech.loyali.communication.Interface;
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
+import com.silbytech.loyali.entities.PurchaseSerializer;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.entities.VendorCardSerializer;
 import com.silbytech.loyali.responses.MessageResponse;
@@ -160,5 +163,15 @@ public class Communicator {
                 .build();
         Interface inter = restAdapter.create(Interface.class);
         inter.redeemRewardPOST(rewardID, serverResponse);
+    }
+
+
+    void getCustomerPurchases(String customerID, Callback<List<PurchaseSerializer>> serverResponse){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(LOYALI_API)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        Interface inter = restAdapter.create(Interface.class);
+        inter.getPurchases(customerID, serverResponse);
     }
 }
