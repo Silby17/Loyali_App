@@ -64,11 +64,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch(item.getItemId()){
             case R.id.itemProfile:
                 Intent i = new Intent(MainMenuActivity.this, UserProfileActivity.class);
                 MainMenuActivity.this.startActivity(i);
+                return true;
+            case R.id.itemPurchaseHistory:
+                Intent pIntent = new Intent(MainMenuActivity.this, PurchasesActivity.class);
+                MainMenuActivity.this.startActivity(pIntent);
                 return true;
             case R.id.itemLogout:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
