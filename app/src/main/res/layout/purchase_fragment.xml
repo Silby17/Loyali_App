@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/purchaseFrag"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:id="@+id/vendorLogoFrag"
+        android:layout_marginLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:id="@+id/imgVendorLogo"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/vendorLogoFrag">
+
+        <TextView
+            android:layout_below="@+id/txtPurchaseDate"
+            android:id="@+id/txtPurchaseType"
+            android:layout_centerInParent="true"
+            android:text="-type-"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtPurchaseDate"
+            android:text="-date-"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>
