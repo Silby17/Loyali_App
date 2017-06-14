@@ -2,8 +2,9 @@
 <RelativeLayout
     android:id="@+id/purchaseFrag"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="130dp">
+    android:layout_height="110dp">
 
     <RelativeLayout
         android:layout_centerVertical="true"
@@ -22,30 +23,28 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@+id/fragDetails"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/vendorLogoFrag">
 
         <TextView
-            android:layout_below="@+id/txtPurchaseDate"
-            android:id="@+id/txtPurchaseType"
-            android:layout_centerInParent="true"
-            android:text="-type-"
-            android:textColor="@android:color/black"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
             android:id="@+id/txtPurchaseDate"
-            android:text="-date-"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:textAlignment="textEnd"
             android:gravity="end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/txtPurchaseType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:layout_below="@+id/txtPurchaseDate"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 </RelativeLayout>
