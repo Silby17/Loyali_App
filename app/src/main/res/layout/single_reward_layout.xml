@@ -3,9 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+    </android.support.design.widget.AppBarLayout>
+
 
     <RelativeLayout
         android:id="@+id/vendorHeaderFrag"
+        android:layout_below="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="210dp">
 
@@ -83,7 +94,6 @@
         android:layout_height="1.5dp"
         android:background="#b80102"/>
 
-
     <LinearLayout
         android:id="@+id/rightLayout"
         android:layout_width="match_parent"
@@ -112,7 +122,7 @@
                 android:layout_marginLeft="5dp">
 
                 <TextView
-                    android:background="@drawable/rounded_corner_red"
+                    android:background="@drawable/top_rounded_corners_red"
                     android:id="@+id/reward1Title"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -147,7 +157,6 @@
             </RelativeLayout>
         </LinearLayout>
 
-
         <!-- The Linear Layout for the bottom card -->
         <LinearLayout
             android:layout_marginRight="5dp"
@@ -168,7 +177,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:background="@drawable/rounded_corner_red"
+                    android:background="@drawable/top_rounded_corners_red"
                     android:id="@+id/reward2Title"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
