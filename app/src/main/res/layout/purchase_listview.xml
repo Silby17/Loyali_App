@@ -19,4 +19,13 @@
         android:dividerHeight="6dp"
         android:divider="#d1d1d1">
     </ListView>
+
+    <TextView
+        android:id="@+id/empty"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="@string/currently_no_history" />
 </LinearLayout>
