@@ -84,6 +84,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                             @Override
                             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 final String vendor_id = view.getTag().toString();
+                                final int intVendorID = Integer.parseInt(vendor_id);
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
                                 alertDialogBuilder.setTitle(R.string.add_to_favourites);
 
@@ -92,7 +93,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                                         .setMessage(R.string.save_to_favourites)
                                         .setCancelable(false)
                                         .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                            public void onClick(DialogInterface dialog, int id) {
 
                                                 //This Async Task will Attempt to make a new subscription
                                                 // between this mobile user and the vendor fragment they
@@ -108,6 +109,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
                                                                     public void success(MessageResponse messageResponse, Response response) {
                                                                         Toast.makeText(getApplicationContext(),
                                                                                 messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        SplashActivity.pubnubController.RegisterVendorChannel(intVendorID);
                                                                     }
                                                                     //Failure creating subscription
                                                                     @Override
