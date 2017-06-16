@@ -30,4 +30,5 @@
     <string name="redeemTitle">Redeem Reward</string>
     <string name="noReward">Reward is Empty</string>
     <string name="currently_no_history">Currently no history</string>
+    <string name="currently_no_favorites">Currently No Favorites</string>
 </resources>
