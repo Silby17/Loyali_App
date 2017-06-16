@@ -114,7 +114,6 @@
             android:layout_weight="1">
 
             <RelativeLayout
-                android:background="@drawable/lighter_filter_coffee"
                 android:id="@+id/card1TopBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -182,8 +181,6 @@
 
                 </GridLayout>
             </RelativeLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>
