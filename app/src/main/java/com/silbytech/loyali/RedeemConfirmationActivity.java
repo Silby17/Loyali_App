@@ -42,9 +42,9 @@ public class RedeemConfirmationActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width * 0.8), (int)(height * .55));
+        //Sets the size of the popup window
+        getWindow().setLayout((int)(width * 0.8), (int)(height * .75));
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
 
         //Set the onClick Listener for the Close button
         btnClose.setOnClickListener(new View.OnClickListener() {
