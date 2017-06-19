@@ -97,11 +97,17 @@
 
 
     <LinearLayout
-        android:layout_below="@+id/viewSeperator"
         android:id="@+id/rightLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_below="@+id/viewSeperator"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <!-- The linear layout for both cards -->
         <LinearLayout
@@ -114,6 +120,7 @@
             android:layout_weight="1">
 
             <RelativeLayout
+                android:background="@drawable/card_shadow_round"
                 android:id="@+id/card1TopBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -153,8 +160,9 @@
             android:layout_weight="1">
 
             <RelativeLayout
+
                 android:id="@+id/card2TopBox"
-                android:background="#e7e8ea"
+                android:background="@drawable/card_shadow_round"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
