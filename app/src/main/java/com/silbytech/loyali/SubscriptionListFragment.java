@@ -66,12 +66,10 @@ public class SubscriptionListFragment extends Fragment {
                         new Callback<List<SubscriptionSerializable>>() {
                             @Override
                             public void success(List<SubscriptionSerializable> subscriptionSerializables, Response response) {
-                                System.out.println("Here");
                                 lvSubscriptions = (ListView)getActivity().findViewById(R.id.lstViewSubscriptions);
                                 subscriptionList = subscriptionSerializables;
                                 subscriptionAdapter = new SubscriptionListAdapterNew(getApplicationContext(), subscriptionList);
                                 lvSubscriptions.setAdapter(subscriptionAdapter);
-
                                 lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -87,6 +85,7 @@ public class SubscriptionListFragment extends Fragment {
                                     @Override
                                     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                                         final String vendor_ID = view.getTag().toString();
+                                        final int intVendorID = Integer.parseInt(vendor_ID);
                                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
                                         alertDialogBuilder.setTitle(R.string.deleteSubscriptionTitle);
                                         // set dialog message
@@ -113,6 +112,7 @@ public class SubscriptionListFragment extends Fragment {
                                                                                 if(response.getStatus() == 200){
                                                                                     Toast.makeText(getApplicationContext(),
                                                                                             R.string.subDeleted, Toast.LENGTH_SHORT).show();
+                                                                                    SplashActivity.pubnubController.DeRegisterVendorChannel(intVendorID);
                                                                                 }
                                                                             }
                                                                             @Override
