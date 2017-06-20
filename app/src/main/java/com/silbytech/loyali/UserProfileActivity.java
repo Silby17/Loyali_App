@@ -40,10 +40,13 @@ public class UserProfileActivity extends AppCompatActivity {
 
         TextView tvFullName = (TextView)findViewById(R.id.txtProfileFullName);
         TextView tvUsername = (TextView)findViewById(R.id.txtProfileUsername);
+        TextView tvCustomerID = (TextView)findViewById(R.id.txtCustomerID);
 
         tvFullName.setText(fullName);
         tvUsername.setText(username);
+        tvCustomerID.setText(id);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +54,7 @@ public class UserProfileActivity extends AppCompatActivity {
         inflater.inflate(R.menu.profile_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
