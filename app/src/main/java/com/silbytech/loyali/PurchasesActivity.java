@@ -32,6 +32,7 @@ public class PurchasesActivity extends AppCompatActivity {
     private PurchaseAdapter purchaseAdapter;
     private List<PurchaseSerializer> purchaseList;
     private String customerID;
+    private String vendorID;
     Context context = this;
 
 
@@ -46,16 +47,17 @@ public class PurchasesActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         this.lvPurchases = (ListView)findViewById(R.id.lstViewPurchases);
+        this.lvPurchases.setEmptyView(findViewById(R.id.emptyPurchases));
         preferences = getApplicationContext().getSharedPreferences(PREFS, 0);
         //Retrieves the Customer_if from the preferences and stores it locally
         customerID = preferences.getString("customer_id", "");
-
+        vendorID = getIntent().getStringExtra("vendor_id");
 
         (new AsyncTask<String, Void, Void>(){
             @Override
             protected Void doInBackground(String... strings) {
                 Communicator communicator = new Communicator();
-                communicator.getCustomerPurchases(strings[0],
+                communicator.getCustomerPurchases(strings[0], strings[1],
                         new Callback<List<PurchaseSerializer>>() {
                             @Override
                             public void success(List<PurchaseSerializer> purchaseSerializers, Response response) {
@@ -71,7 +73,7 @@ public class PurchasesActivity extends AppCompatActivity {
                         });
                 return null;
             }
-        }).execute(customerID);
+        }).execute(customerID, vendorID);
     }
 
 
