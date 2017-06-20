@@ -16,8 +16,8 @@
 
 
     <RelativeLayout
-        android:layout_below="@+id/topBar"
         android:id="@+id/vendorHeaderFrag"
+        android:layout_below="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="210dp">
 
@@ -205,6 +205,11 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnPurchasesOfVendor"
+        android:background="@drawable/rounded_corner_red"
+        android:onClick="GetPurchaseHistory"
+        android:textColor="#ffff"
+        android:layout_marginBottom="5dp"
         android:text="Purchase History"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
