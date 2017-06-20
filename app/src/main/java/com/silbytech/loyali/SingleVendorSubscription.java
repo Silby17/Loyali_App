@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,15 +35,16 @@ import retrofit.client.Response;
  ************************************/
 public class SingleVendorSubscription extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
-    private String MEDIA_URL = "http://192.168.137.1:8000";
+    private String MEDIA_URL = "http://192.168.1.13:8000";
     public static final String PREFS = "prefs";
-    Context context = this;
+    private List<SubscriptionSerializable> subscriptionList;
     public int buttonClicked = 0;
-    SharedPreferences preferences;
     private int cardOneID;
     private int cardTwoID;
     private String customer_id;
     private String vendor_id;
+    SharedPreferences preferences;
+    Context context = this;
     Activity activity = this;
     ImageView logo;
     TextView txtTitle;
@@ -53,6 +55,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
     TextView card2Header;
     GridLayout gridLayoutTop;
     GridLayout gridLayoutBottom;
+    String location;
 
     /**************************************************************************************
      * This method will make a call to the server and get all the information of the
@@ -62,13 +65,14 @@ public class SingleVendorSubscription extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vendor_subscription_fragment);
+        setContentView(R.layout.subscribed_vendor_layout);
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        //Initializes all the layouts for manipulation
         logo = (ImageView)findViewById(R.id.imgVendorLogo);
         txtTitle = (TextView)findViewById(R.id.txtVendorTitle);
         txtType = (TextView)findViewById(R.id.txtVendorType);
@@ -95,10 +99,13 @@ public class SingleVendorSubscription extends AppCompatActivity {
                             public void success(List<SubscriptionSerializable> subscriptionSerializables, Response response) {
                                 String imageURL = MEDIA_URL + subscriptionSerializables.get(0).getVendor().getLogoTitle();
                                 Picasso.with(getApplicationContext()).load(imageURL).into(logo);
+                                subscriptionList = subscriptionSerializables;
                                 txtTitle.setText(subscriptionSerializables.get(0).getVendor().getStoreName());
                                 txtType.setText(subscriptionSerializables.get(0).getVendor().getStoreType());
                                 txtPhone.setText(subscriptionSerializables.get(0).getVendor().getPhone());
                                 txtLocation.setText(subscriptionSerializables.get(0).getVendor().getLocation());
+                                location = subscriptionSerializables.get(0).getVendor().getLocation();
+
 
                                 //Displays all the information of the first Card that's in Use
                                 if(subscriptionSerializables.get(0).getCardInUse().size() != 0){
@@ -134,7 +141,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                             Picasso.with(getApplicationContext()).load(redLogoURL).into(img2);
                                             gridLayoutBottom.addView(img2, 150, 150);
                                         }
-                                        for(int j = i; j < card2Max; j++){
+                                        for(int j = m; j < card2Max; j++){
                                             img2 = new ImageView(getApplicationContext());
                                             String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
                                             Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
@@ -204,6 +211,12 @@ public class SingleVendorSubscription extends AppCompatActivity {
     }
 
 
+    /**************************************************************************************
+     * This method will be called after the QR Scan as completed
+     * @param requestCode - Request code
+     * @param resultCode - result
+     * @param data - data that was scanned
+     **************************************************************************************/
     @Override
     protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -271,6 +284,12 @@ public class SingleVendorSubscription extends AppCompatActivity {
         buttonClicked = 0;
     }
 
+
+    /**************************************************************************************
+     * Inflates the Options Menu
+     * @param menu - menu
+     * @return - true
+     **************************************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -323,5 +342,16 @@ public class SingleVendorSubscription extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    /**************************************************************************************
+     * Opens up Google Maps in order to Navigate to the location
+     * @param v - the current VIew
+     **************************************************************************************/
+    public void NavigateMaps(View v){
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("google.navigation:q=" + location));
+        SingleVendorSubscription.this.startActivity(intent);
     }
 }
