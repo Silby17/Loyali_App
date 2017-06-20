@@ -120,13 +120,14 @@ public class RegisterActivity extends AppCompatActivity {
                                         public void success(RegisterResponse registerResponse, Response response) {
                                             if(response.getStatus() == 200){
                                                 //Gets the Shared Preferences
+                                                String fullName = registerResponse.getApiUser().getFirstName() + " " + registerResponse.getApiUser().getLastName();
                                                 preferences = getSharedPreferences(PREFS, 0);
                                                 preferences.edit().putBoolean("isFacebookUser", false).apply();
                                                 //Adds the email, customer ID and login boolean to Prefs
                                                 preferences.edit().putInt("userid", registerResponse.getApiUser().getCustomer_id()).apply();
                                                 SplashActivity.pubnubController.RegisterUserChannel();
                                                 preferences.edit().putString("username", email).apply();
-                                                preferences.edit().putString("pass", password).apply();
+                                                preferences.edit().putString("fullName", fullName).apply();
                                                 preferences.edit().putString("customer_id", Integer.toString(registerResponse.getApiUser().getCustomer_id())).apply();
                                                 preferences.edit().putBoolean("logged-in", true).apply();
 
