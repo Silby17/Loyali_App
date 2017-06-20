@@ -298,6 +298,11 @@ public class SingleVendorSubscription extends AppCompatActivity {
     }
 
 
+    /**************************************************************************************
+     * Method that will handle the menu option choices
+     * @param item - item that was clicked
+     * @return - returns true after each action
+     **************************************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -353,5 +358,16 @@ public class SingleVendorSubscription extends AppCompatActivity {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("google.navigation:q=" + location));
         SingleVendorSubscription.this.startActivity(intent);
+    }
+
+
+    /**************************************************************************************
+     * Gets the purchase history of the current Vendor by passing the vendor ID.
+     * @param view - Current View
+     **************************************************************************************/
+    public void GetPurchaseHistory(View view){
+        Intent i = new Intent(SingleVendorSubscription.this, PurchasesActivity.class);
+        i.putExtra("vendor_id", vendor_id);
+        SingleVendorSubscription.this.startActivity(i);
     }
 }
