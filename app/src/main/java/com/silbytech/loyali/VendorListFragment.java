@@ -35,7 +35,6 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
     private SharedPreferences preferences;
     private ListView lvVendors;
     String customer_id;
-    FragmentTransaction fragmentTransaction;
 
     public VendorListFragment() {}
 
