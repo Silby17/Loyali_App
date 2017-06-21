@@ -1,7 +1,5 @@
 package com.silbytech.loyali.communication;
 
-import android.telecom.Call;
-
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import com.silbytech.loyali.entities.PurchaseSerializer;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
@@ -108,5 +106,6 @@ public interface Interface {
 
     @GET("/customer/allPurchases/")
     void getPurchases(@Query("customer_id") String customerID,
+                      @Query("vendor_id") String vendorID,
                       Callback<List<PurchaseSerializer>> serverResponse);
 }
