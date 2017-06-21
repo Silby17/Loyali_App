@@ -1,4 +1,4 @@
-package com.silbytech.loyali;
+package com.silbytech.loyali.entities;
 
 import com.google.gson.annotations.SerializedName;
 
