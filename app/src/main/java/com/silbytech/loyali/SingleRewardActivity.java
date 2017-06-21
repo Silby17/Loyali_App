@@ -29,7 +29,7 @@ import retrofit.client.Response;
  ************************************/
 public class SingleRewardActivity extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
-    private String MEDIA_URL = "http://192.168.137.1:8000";
+    private String MEDIA_URL;
     public static final String PREFS = "prefs";
     public int rewardsCount = 0;
     SharedPreferences preferences;
@@ -55,6 +55,7 @@ public class SingleRewardActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_reward_layout);
+        this.MEDIA_URL = ((MyApplication)this.getApplication()).getMEDIA_URL();
 
         //Adds the Toolbar to the top of the Layout
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
