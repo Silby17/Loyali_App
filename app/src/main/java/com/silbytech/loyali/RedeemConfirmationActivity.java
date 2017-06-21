@@ -1,6 +1,7 @@
 package com.silbytech.loyali;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,7 +16,8 @@ import com.squareup.picasso.Picasso;
  ************************************/
 public class RedeemConfirmationActivity extends Activity {
     //Deceleration of Variables
-    private String MEDIA_URL = "http://192.168.1.15:8000";
+    public static final String PREFS = "prefs";
+    private String MEDIA_URL;
     Button btnClose;
     TextView txtTitle;
     ImageView logoImg;
@@ -25,6 +27,8 @@ public class RedeemConfirmationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.redeemed_layout);
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS, 0);
+        this.MEDIA_URL = sharedPreferences.getString("media_url","");
 
         //Assign views
         txtTitle = (TextView)findViewById(R.id.txtRewardType);
