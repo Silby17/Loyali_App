@@ -35,7 +35,7 @@ import retrofit.client.Response;
  ************************************/
 public class SingleVendorSubscription extends AppCompatActivity {
     private String TAG = "SingleVendorSubscription";
-    private String MEDIA_URL = "http://192.168.1.13:8000";
+    private String MEDIA_URL;
     public static final String PREFS = "prefs";
     private List<SubscriptionSerializable> subscriptionList;
     public int buttonClicked = 0;
@@ -66,6 +66,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subscribed_vendor_layout);
+        this.MEDIA_URL = ((MyApplication)this.getApplication()).getMEDIA_URL();
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
