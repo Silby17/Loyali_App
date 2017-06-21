@@ -1,6 +1,7 @@
 package com.silbytech.loyali.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -18,12 +19,21 @@ import java.util.List;
  ************************************/
 public class SubscriptionListAdapterNew extends BaseAdapter {
     private List<SubscriptionSerializable> subscriptionList;
-    private String MEDIA_URL = "http://192.168.137.1:8000";
+    private String MEDIA_URL;
+    public static final String PREFS = "prefs";
     private Context context;
 
+
+    /****************************************************************************************
+     * The constructor method
+     * @param context - the application context
+     * @param subscriptionList - list of all the customers subscriptions
+     *****************************************************************************************/
     public SubscriptionListAdapterNew(Context context, List<SubscriptionSerializable> subscriptionList) {
         this.subscriptionList = subscriptionList;
         this.context = context;
+        SharedPreferences preferences = context.getSharedPreferences(PREFS, 0);
+        this.MEDIA_URL = preferences.getString("media_url", "");
     }
 
     @Override
@@ -77,6 +87,7 @@ public class SubscriptionListAdapterNew extends BaseAdapter {
             card1.setText(card1Count);
             card1Header.setText(subscriptionList.get(position).getCardInUse().get(0).getCard().getType());
         }
+        //Sets the tag ID to the Subscription ID
         v.setTag(subscriptionList.get(position).getVendor().getId());
         return v;
     }

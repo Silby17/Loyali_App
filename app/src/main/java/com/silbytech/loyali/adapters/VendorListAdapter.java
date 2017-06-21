@@ -1,6 +1,7 @@
 package com.silbytech.loyali.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,14 +16,21 @@ import java.util.List;
  * Created by Yosef Silberhaft
  ************************************/
 public class VendorListAdapter extends BaseAdapter {
-    private String MEDIA_URL = "http://192.168.137.1:8000";
     private List<VendorCardSerializer> vendorsList;
+    public static final String PREFS = "prefs";
+    private String MEDIA_URL;
     private Context context;
 
-
+    /****************************************************************************************
+     * The constructor method
+     * @param context - the context
+     * @param vendorsList - the list of all the vendors
+     ***************************************************************************************/
     public VendorListAdapter(Context context, List<VendorCardSerializer> vendorsList) {
         this.context = context;
         this.vendorsList = vendorsList;
+        SharedPreferences preferences = context.getSharedPreferences(PREFS, 0);
+        this.MEDIA_URL = preferences.getString("media_url", "");
     }
 
     @Override
@@ -58,13 +66,15 @@ public class VendorListAdapter extends BaseAdapter {
         storeLocation.setText(vendorsList.get(position).getLocation());
         storePhone.setText(vendorsList.get(position).getPhone());
         storeType.setText(vendorsList.get(position).getStoreType());
+
         if (vendorsList.get(position).getCards().size() == 2) {
             card1.setText(vendorsList.get(position).getCards().get(0).getDescription());
             card2.setText(vendorsList.get(position).getCards().get(1).getDescription());
         } else if (vendorsList.get(position).getCards().size() == 1){
             card1.setText(vendorsList.get(position).getCards().get(0).getDescription());
         }
-        //Save Vendor id to tag
+
+        //Save Vendor ID to tag
         v.setTag(vendorsList.get(position).getId());
         return v;
     }

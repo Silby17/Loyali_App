@@ -1,6 +1,7 @@
 package com.silbytech.loyali.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,13 +23,22 @@ import java.util.List;
  * Created by Yosef Silberhaft
  ************************************/
 public class PurchaseAdapter extends BaseAdapter {
-    private String MEDIA_URL = "http://192.168.137.1:8000";
+    private String MEDIA_URL;
     private List<PurchaseSerializer> purchaseList;
+    public static final String PREFS = "prefs";
     private Context context;
 
+
+    /****************************************************************************************
+     * The constructor method
+     * @param context - the context
+     * @param purchaseList - A list of all the Purchases
+     ***************************************************************************************/
     public PurchaseAdapter(List<PurchaseSerializer> purchaseList, Context context) {
         this.purchaseList = purchaseList;
         this.context = context;
+        SharedPreferences preferences = context.getSharedPreferences(PREFS, 0);
+        this.MEDIA_URL = preferences.getString("media_url", "");
     }
 
     @Override
