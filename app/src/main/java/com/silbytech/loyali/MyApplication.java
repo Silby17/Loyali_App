@@ -1,6 +1,8 @@
 package com.silbytech.loyali;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+
 import java.io.File;
 
 /************************************
@@ -8,11 +10,18 @@ import java.io.File;
  ************************************/
 public class MyApplication extends Application {
     private static MyApplication instance;
+    public static final String PREFS = "prefs";
+    private String MEDIA_URL = "http://192.168.1.14:8000";
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        //Get shared preferences
+        SharedPreferences preferences = getSharedPreferences(PREFS, 0);
+        //Add MEDIA_URL to shared preferences
+        preferences.edit().putString("media_url", MEDIA_URL).apply();
     }
 
     public static MyApplication getInstance() {return instance;}
@@ -44,5 +53,10 @@ public class MyApplication extends Application {
             }
         }
         return deletedAll;
+    }
+
+    //Getter for MEDIA_URL
+    public String getMEDIA_URL() {
+        return MEDIA_URL;
     }
 }
