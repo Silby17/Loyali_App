@@ -1,6 +1,4 @@
 package com.silbytech.loyali;
-import android.telecom.Call;
-
 import com.silbytech.loyali.communication.Interface;
 import com.silbytech.loyali.entities.CustomerRewardsListSerializable;
 import com.silbytech.loyali.entities.PurchaseSerializer;
@@ -17,8 +15,9 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://192.168.137.1:8000/loyali";
-    private static final String LOYALI_API = "http://192.168.137.1:8000/loyaliapi";
+    private static final String LOYALI_API = "http://192.168.1.14:8000/loyaliapi";
+
+    //private static final String LOYALI_API = "http://http://34.250.74.48/loyaliapi";
 
     /****************************************************************************************
      *                                                                      -----Tested------
@@ -64,7 +63,7 @@ public class Communicator {
                               String userID,
                               Callback<RegisterResponse> callback){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(SERVER_URL)
+                .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Interface comInterface = restAdapter.create(Interface.class);
@@ -166,12 +165,13 @@ public class Communicator {
     }
 
 
-    void getCustomerPurchases(String customerID, Callback<List<PurchaseSerializer>> serverResponse){
+    void getCustomerPurchases(String customerID, String vendorID,
+                              Callback<List<PurchaseSerializer>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Interface inter = restAdapter.create(Interface.class);
-        inter.getPurchases(customerID, serverResponse);
+        inter.getPurchases(customerID, vendorID, serverResponse);
     }
 }

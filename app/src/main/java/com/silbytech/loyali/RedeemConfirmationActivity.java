@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
  ************************************/
 public class RedeemConfirmationActivity extends Activity {
     //Deceleration of Variables
-    private String MEDIA_URL = "http://192.168.137.1:8000";
+    private String MEDIA_URL = "http://192.168.1.15:8000";
     Button btnClose;
     TextView txtTitle;
     ImageView logoImg;

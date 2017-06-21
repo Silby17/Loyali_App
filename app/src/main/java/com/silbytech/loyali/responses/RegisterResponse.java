@@ -1,7 +1,7 @@
 package com.silbytech.loyali.responses;
 
 import com.google.gson.annotations.SerializedName;
-import com.silbytech.loyali.APIUserSerializer;
+import com.silbytech.loyali.entities.APIUserSerializer;
 
 import java.io.Serializable;
 
