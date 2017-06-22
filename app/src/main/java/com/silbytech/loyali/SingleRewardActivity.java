@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class SingleRewardActivity extends AppCompatActivity {
     private int reward2ID;
     private String customer_id;
     private String vendor_id;
+    String location;
     ImageView logo;
     TextView txtTitle;
     TextView txtType;
@@ -51,6 +53,11 @@ public class SingleRewardActivity extends AppCompatActivity {
     String vendorLogo;
     Context context = this;
 
+
+    /************************************************************************************
+     * On Create method that will be called on Creation of this activity
+     * @param savedInstanceState - the saved instance
+     ************************************************************************************/
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +71,6 @@ public class SingleRewardActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
         logo = (ImageView)findViewById(R.id.imgVendorLogo);
         txtTitle = (TextView)findViewById(R.id.txtVendorTitle);
         txtType = (TextView)findViewById(R.id.txtVendorType);
@@ -95,6 +101,7 @@ public class SingleRewardActivity extends AppCompatActivity {
                                 txtPhone.setText(customerRewardsListSerializables.get(0).getPhone());
                                 txtLocation.setText(customerRewardsListSerializables.get(0).getLocation());
                                 vendorLogo = customerRewardsListSerializables.get(0).getLogoTitle();
+                                location = customerRewardsListSerializables.get(0).getLocation();
 
                                 if(customerRewardsListSerializables.get(0).getRewardsList() != null){
                                     reward1ID = customerRewardsListSerializables.get(0).getRewardsList().get(0).getId();
@@ -129,11 +136,11 @@ public class SingleRewardActivity extends AppCompatActivity {
     }
 
 
-    /*************************************************************
+    /************************************************************************************
      * This method will override the onBackPressed so that after
      * the user has punched his card all new updated info
      * is loaded and seen in the app
-     *************************************************************/
+     ************************************************************************************/
     @Override
     public void onBackPressed() {
         Intent i = new Intent(SingleRewardActivity.this, MainMenuActivity.class);
@@ -229,13 +236,11 @@ public class SingleRewardActivity extends AppCompatActivity {
                                         public void failure(RetrofitError error) {
                                             Toast.makeText(getApplicationContext(),
                                                     R.string.connectionError, Toast.LENGTH_SHORT).show();
-
                                         }
                                     });
                             return null;
                         }
                     }).execute(Integer.toString(reward2ID));
-
                 }
             }).setNegativeButton("No",new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog,int id) {
@@ -244,7 +249,6 @@ public class SingleRewardActivity extends AppCompatActivity {
                     dialog.cancel();
                 }
             });
-
             // create alert dialog
             AlertDialog alertDialog = alertDialogBuilder.create();
             // show it
@@ -256,6 +260,12 @@ public class SingleRewardActivity extends AppCompatActivity {
         }
     }
 
+
+    /************************************************************************************
+     * This will inflate the options menu for the current layout.
+     * @param menu - menu to inflate
+     * @return - true
+     ************************************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -307,5 +317,16 @@ public class SingleRewardActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    /**************************************************************************************
+     * This will handle the OnClick of the navigation icon of the rewards page.
+     * @param view - the current passed view
+     *************************************************************************************/
+    public void RewardsNavigateMaps(View view){
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("google.navigation:q=" + location));
+        SingleRewardActivity.this.startActivity(intent);
     }
 }
