@@ -33,6 +33,7 @@ public class UserProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        /*Retrieves all the users info from the shared preferences */
         preferences = getSharedPreferences(PREFS, 0);
         String username = preferences.getString("username", "");
         String fullName = preferences.getString("fullName", "");
@@ -58,7 +59,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
+        // Handle Back arrow click
         if (item.getItemId() == android.R.id.home) {
             finish(); // close this activity and return to preview activity (if there is any)
         }
