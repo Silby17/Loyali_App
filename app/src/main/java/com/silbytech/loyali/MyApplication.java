@@ -27,6 +27,9 @@ public class MyApplication extends Application {
     public static MyApplication getInstance() {return instance;}
 
 
+    /*******************************************************************************
+     * This method will clear all of the Application data from the device
+     *******************************************************************************/
     public void clearApplicationData() {
         File cacheDirectory = getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -40,6 +43,12 @@ public class MyApplication extends Application {
         }
     }
 
+
+    /*******************************************************************************
+     * This method will delete all file of the app from the device
+     * @param file - file to remove
+     * @return - true at completion
+     ********************************************************************************/
     public static boolean deleteFile(File file) {
         boolean deletedAll = true;
         if (file != null) {
@@ -55,7 +64,11 @@ public class MyApplication extends Application {
         return deletedAll;
     }
 
-    //Getter for MEDIA_URL
+
+    /*******************************************************************************
+     * Gets the MEDIA_URL
+     * @return - MEDIA_URL
+     *******************************************************************************/
     public String getMEDIA_URL() {
         return MEDIA_URL;
     }
