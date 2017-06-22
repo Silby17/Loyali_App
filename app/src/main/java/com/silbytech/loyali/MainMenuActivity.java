@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 
+import com.silbytech.loyali.adapters.ViewPagerAdapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.silbytech.loyali.adapters.ViewPagerAdapter;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -29,6 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu_fragments);
+        //Sets the toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         viewPager = (ViewPager)findViewById(R.id.viewpager);
@@ -37,10 +38,15 @@ public class MainMenuActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    /*****************************************************************************************
+     * Sets up the View pager on the main menu
+     * @param viewPager - view pager to be displayed
+     *****************************************************************************************/
     private void setupViewPager(ViewPager viewPager){
         // Creates a new View Pager Adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+        //Adds Reward Tab
         adapter.addFragment(RewardsListFragment.newInstance(), "Rewards");
 
         // Adds Vendor List Page to ViewPager
@@ -77,7 +83,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setTitle("Logout");
 
-                // set dialog message
+                // Set Dialog Message
                 alertDialogBuilder
                         .setMessage("Are you sure you want to Logout?")
                         .setCancelable(false)
@@ -105,6 +111,5 @@ public class MainMenuActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }
