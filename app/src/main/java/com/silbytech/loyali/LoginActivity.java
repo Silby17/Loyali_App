@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-
+        /*Opens Register Screen*/
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
