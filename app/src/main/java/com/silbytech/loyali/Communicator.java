@@ -17,10 +17,8 @@ public class Communicator {
     private static final String TAG = "Communicator";
     private static final String LOYALI_API = "http://192.168.1.14:8000/loyaliapi";
 
-    //private static final String LOYALI_API = "http://http://34.250.74.48/loyaliapi";
 
     /****************************************************************************************
-     *                                                                      -----Tested------
      * This function will POST the new Mobile users information to the API
      * @param firstName - first name
      * @param lastName - last name
@@ -43,6 +41,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This Method will send the users login details to the server for authentication
+     * @param username - username
+     * @param password - password
+     * @param callback - server response
+     ****************************************************************************************/
     void userLogin(String username, String password, Callback<RegisterResponse> callback){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -70,6 +74,12 @@ public class Communicator {
         comInterface.postNewFBUser(name, userID, callback);
     }
 
+
+    /****************************************************************************************
+     * This will GET a list of all vendors together with a list of the cards that they
+     * offer
+     * @param serverResponse - the server response
+     ****************************************************************************************/
     void getVendorsWithCards(Callback<List<VendorCardSerializer>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -80,6 +90,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This Method will POST the details ofa new subscription to the server
+     * @param vendor_id - vendor ID
+     * @param customer_id - Customer ID
+     * @param callback - the servers response
+     *****************************************************************************************/
     void postCreateSubscription(String vendor_id, String customer_id,
                                        Callback<MessageResponse> callback) {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -91,6 +107,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will post the necessary details in order to delete a subscription
+     * @param customerID - customers ID
+     * @param vendorID - vendors D
+     * @param callback - the server response
+     *****************************************************************************************/
     void deleteSubscriptionPost(String customerID, String vendorID,
                                 Callback<MessageResponse> callback){
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -102,6 +124,11 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will GET all the current users subscriptions
+     * @param customer_id - current customers ID
+     * @param serverResponse - response from server
+     *****************************************************************************************/
     void getSubscriptions(String customer_id, Callback<List<SubscriptionSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -112,6 +139,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will get all the information of a specific subscription of the customer
+     * @param customer_id - customers ID
+     * @param vendor_id - vendors ID
+     * @param serverResponse - server response
+     *****************************************************************************************/
     void getSubscriptionCardsByVendorID(String customer_id, String vendor_id,
                                         Callback<List<SubscriptionSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -123,6 +156,13 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will post the necessary information to the server to "punch" a certain card
+     * @param customerID - customer ID
+     * @param barcode - barcode Scanned
+     * @param cardID - Card ID to be punched
+     * @param serverResponse - server response
+     *****************************************************************************************/
     void punchCard(String customerID, String barcode, String cardID,
                    Callback<MessageResponse> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -134,6 +174,11 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will GET all the rewards of the current user
+     * @param customerID - customers ID
+     * @param serverResponse - server response
+     ****************************************************************************************/
     void getRewards(String customerID, Callback<List<CustomerRewardsListSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -144,6 +189,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * This will get all the info of the Vendor and the rewards relating to that vendor
+     * @param customerID - the customers ID
+     * @param vendorID - vendors ID
+     * @param serverResponse - server response
+     ****************************************************************************************/
     void getRewardsByVendor(String customerID, String vendorID,
                             Callback<List<CustomerRewardsListSerializable>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -155,6 +206,11 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * POST to the server in order to redeem a reward
+     * @param rewardID - reward ID to be redeemed
+     * @param serverResponse - server response
+     ****************************************************************************************/
     void redeemRewardPOST(String rewardID, Callback<MessageResponse> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(LOYALI_API)
@@ -165,6 +221,12 @@ public class Communicator {
     }
 
 
+    /****************************************************************************************
+     * Gets a list of all the customers purchases
+     * @param customerID - customer ID
+     * @param vendorID - vendors ID (optional value)
+     * @param serverResponse - server response
+     ****************************************************************************************/
     void getCustomerPurchases(String customerID, String vendorID,
                               Callback<List<PurchaseSerializer>> serverResponse){
         RestAdapter restAdapter = new RestAdapter.Builder()
