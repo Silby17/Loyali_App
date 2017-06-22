@@ -24,6 +24,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
+        <!-- Below are all the Activities -->
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,13 +47,6 @@
         </activity>
 
         <activity android:name=".RegisterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".TempMainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -87,6 +81,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".PurchasesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity
             tools:replace="android:theme"
             android:name="com.facebook.FacebookActivity"
@@ -95,15 +96,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
 
-        <activity android:name=".PurchasesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-
-
-        <!-- The PubNub calls -->
+        <!-- The PubNub calls and definitions -->
         <receiver
             android:name=".gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -115,9 +108,9 @@
         <service android:name=".gcm.GcmIntentService" />
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
 
+    <!-- Defines the Provider -->
     <provider android:authorities="com.facebook.app.FacebookContentProvider176498166198138"
         android:name="com.facebook.FacebookContentProvider"
         android:exported="true" />
