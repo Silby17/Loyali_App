@@ -15,7 +15,7 @@ import retrofit.RestAdapter;
  ************************************/
 public class Communicator {
     private static final String TAG = "Communicator";
-    private static final String LOYALI_API = "http://192.168.1.14:8000/loyaliapi";
+    private static final String LOYALI_API = "http://34.250.74.48/loyaliapi";
 
 
     /****************************************************************************************

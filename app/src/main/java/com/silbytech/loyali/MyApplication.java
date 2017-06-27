@@ -11,7 +11,7 @@ import java.io.File;
 public class MyApplication extends Application {
     private static MyApplication instance;
     public static final String PREFS = "prefs";
-    private String MEDIA_URL = "http://192.168.1.14:8000";
+    private String MEDIA_URL = "http://34.250.74.48";
 
 
     @Override
