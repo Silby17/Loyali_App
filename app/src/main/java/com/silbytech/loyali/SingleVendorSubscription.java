@@ -107,7 +107,6 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                 txtLocation.setText(subscriptionSerializables.get(0).getVendor().getLocation());
                                 location = subscriptionSerializables.get(0).getVendor().getLocation();
 
-
                                 //Displays all the information of the first Card that's in Use
                                 if(subscriptionSerializables.get(0).getCardInUse().size() != 0){
                                     cardOneID = subscriptionSerializables.get(0).getCardInUse().get(0).getId();
@@ -125,7 +124,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                     for(int j = i; j < card1Max; j++){
                                         img = new ImageView(getApplicationContext());
                                         //img.setImageResource(R.drawable.logo_grey_compressed);
-                                        String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
+                                        String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png";
                                         Picasso.with(getApplicationContext()).load(greyLogoURL).into(img);
                                         gridLayoutTop.addView(img, 150, 150);
                                     }
@@ -144,7 +143,7 @@ public class SingleVendorSubscription extends AppCompatActivity {
                                         }
                                         for(int j = m; j < card2Max; j++){
                                             img2 = new ImageView(getApplicationContext());
-                                            String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png/";
+                                            String greyLogoURL = MEDIA_URL + "/media/logo_grey_compressed.png";
                                             Picasso.with(getApplicationContext()).load(greyLogoURL).into(img2);
                                             gridLayoutBottom.addView(img2, 150, 150);
                                         }
