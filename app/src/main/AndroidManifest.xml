@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.silbytech.loyali">
 
-    <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="barcode"/>
-    <permission android:name="com.silbytech.loyali.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="silbydevelopment.trialia.permission.C2D_MESSAGE" />
+    <permission android:name="com.silbytech.loyali.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
 
     <application
         android:name="com.silbytech.loyali.MyApplication"
@@ -105,13 +104,17 @@
                 <category android:name="silbydevelopment.trialia" />
             </intent-filter>
         </receiver>
+
         <service android:name=".gcm.GcmIntentService" />
+
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-    </application>
 
-    <!-- Defines the Provider -->
-    <provider android:authorities="com.facebook.app.FacebookContentProvider176498166198138"
-        android:name="com.facebook.FacebookContentProvider"
-        android:exported="true" />
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="barcode"/>
+
+        <!-- Defines the Provider -->
+        <provider android:authorities="com.facebook.app.FacebookContentProvider176498166198138"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+    </application>
 </manifest>
