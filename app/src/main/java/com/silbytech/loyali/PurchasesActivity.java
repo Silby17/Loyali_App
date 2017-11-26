@@ -1,4 +1,5 @@
 package com.silbytech.loyali;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +37,7 @@ public class PurchasesActivity extends AppCompatActivity {
     Context context = this;
 
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
