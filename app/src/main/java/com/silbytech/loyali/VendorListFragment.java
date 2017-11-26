@@ -1,4 +1,5 @@
 package com.silbytech.loyali;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,6 +56,7 @@ public class VendorListFragment extends android.support.v4.app.Fragment {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
