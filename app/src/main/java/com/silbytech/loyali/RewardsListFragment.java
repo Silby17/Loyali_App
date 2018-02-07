@@ -1,5 +1,6 @@
 package com.silbytech.loyali;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -49,6 +50,7 @@ public class RewardsListFragment extends Fragment {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

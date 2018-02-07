@@ -4,6 +4,8 @@ import com.silbytech.loyali.adapters.SubscriptionListAdapterNew;
 import com.silbytech.loyali.entities.SubscriptionSerializable;
 import com.silbytech.loyali.responses.MessageResponse;
 import static com.facebook.FacebookSdk.getApplicationContext;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,6 +55,7 @@ public class SubscriptionListFragment extends Fragment {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
